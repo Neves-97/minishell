@@ -2,7 +2,7 @@ NAME		=		minishell
 
 CC			=		cc
 
-CFLAGS		=		-Wall -Wextra -Werror -g
+CFLAGS		=		-Wall -Wextra -Werror -g -lreadline
 
 INCLUDES	=		-I$(HEADERS_DIRECTORY) -I$(LIBFT_HEADERS) -I$(FT_PRINTF_HEADERS)
 
@@ -20,14 +20,12 @@ GNL			=		./libft/get_next_line/*.c
 
 RM			=		rm -f
 
-SRC 		=		srcs/*.c ./libft/ft_printf/srcs/*.c
-
-SRCB		=		./checker_src/*.c ./libft/get_next_line/*.c srcs/check.c srcs/error.c srcs/get_values.c srcs/instructions2.c srcs/instructions3.c srcs/instructions.c srcs/make_moves.c srcs/sort.c srcs/sort_utils.c srcs/utils.c
+SRC 		=		srcs/*.c srcs/lexer/*.c ./libft/ft_printf/srcs/*.c
 
 all:		$(NAME)
 
 $(NAME):	$(LIBFT) $(SRC) $(FT_PRINTF)
-			$(CC) $(CFLAGS) $(SRC) $(FT_PRINTF) $(LIBFT) $(INCLUDES) -o $(NAME)
+			$(CC) $(CFLAGS) $(SRC) $(FT_PRINTF) $(GNL) $(LIBFT) $(INCLUDES) -o $(NAME)
 		
 $(LIBFT):
 			make -C ./libft
