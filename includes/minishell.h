@@ -51,5 +51,6 @@ void	create_token(t_msh *data, int i);
 // lexer_utils.c
 void	fill_array(int	*array);
 int		is_separator(char c);
+void	free_nodes(t_list *head);
 
 #endif

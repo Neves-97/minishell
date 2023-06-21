@@ -27,11 +27,10 @@ void	create_token(t_msh *data, int i)
 		i--;
 	if (is_separator(data->input[i]))
 	{
-		// ft_lstadd_back(&(data->tokens), data->input[i]);
+		if (data->input[i] != 32)
+			ft_lstadd_back(&(data->tokens), ft_lstnew(&(data->input[i]), 1));
 		i++;
 	}
-	printf("i: %d\n", i);
-	printf("limit: %d\n", limit);
 	size = limit - i;
 	str = malloc((size) * sizeof(char) + 1);
 	while (i != limit)
@@ -39,10 +38,7 @@ void	create_token(t_msh *data, int i)
 		str[y++] = data->input[i++];
 	}
 	str[y] = '\0';
-	printf("y: %d\n", y);
-	printf("%s$\n\n", str);
-	ft_lstadd_back(&(data->tokens), ft_lstnew(str, size));
+	if (!(is_whtspc(str)))
+		ft_lstadd_back(&(data->tokens), ft_lstnew(str, size));
 	free (str);
 }
-
-

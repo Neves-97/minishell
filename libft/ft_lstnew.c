@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:53:14 by ratavare          #+#    #+#             */
-/*   Updated: 2023/06/20 23:22:05 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:37:50 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_list	*ft_lstnew(char *content, int size)
 	new = malloc(sizeof(t_list));
 	if (new == NULL)
 		return (NULL);
-	new->content = malloc(sizeof(char) * size);
-	while (content[i])
+	new->content = malloc(sizeof(char) * size + 1);
+	while (i < size)
 	{
 		new->content[i] = content[i];
 		i++;

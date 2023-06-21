@@ -34,3 +34,16 @@ int	is_separator(char c)
 	}
 	return (0);
 }
+
+void	free_nodes(t_list *head)
+{
+	t_list	*tmp;
+
+	while (head)
+	{
+		tmp = head->next;
+		free (head->content);
+		free (head);
+		head = tmp;
+	}
+}
