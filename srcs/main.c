@@ -1,7 +1,24 @@
 #include "minishell.h"
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **envp)
 {
+	static t_msh	data;
+
 	(void)ac;
-	printf("%s\n", av[1]);
+	(void)envp;
+	(void)av;
+	while (1)
+	{
+		data.input = readline("minishell:~$ ");
+		if (!(is_whtspc(data.input)))
+			add_history(data.input);
+		minishell(&data);
+		// free (data.input);
+	}
+}
+
+void	minishell(t_msh *data)
+{
+	lexer(data);
+	print_list(data->tokens);
 }
