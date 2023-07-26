@@ -22,7 +22,7 @@ void	fill_array(int	*array)
 
 int	is_separator(char c)
 {
-	int	type[15];
+	int	type[16];
 	int	i;
 
 	fill_array(type);
@@ -46,4 +46,32 @@ void	free_nodes(t_list *head)
 		free (head);
 		head = tmp;
 	}
+}
+
+void	add_separator(t_msh *data, char	sep)
+{
+	char	*str;
+
+	str = malloc(sizeof(char) + 1);
+	str[0] = sep;
+	str[1] = '\0';
+	ft_lstadd_back(&(data->tokens), ft_lstnew(str));
+}
+
+char	*ft_strndup(const char *s, int n)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	str = malloc((ft_strlen((char *)s) * sizeof(char) + 1));
+	if (!str)
+		return (NULL);
+	while (i < n)
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }

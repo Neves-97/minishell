@@ -5,7 +5,7 @@ int	is_whtspc(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (!((str[i] >= 9 && str[i] <= 13) || \
 		str[i] == 32 || str[i] == '\0' || \
@@ -30,4 +30,3 @@ void	print_list(t_list *head)
 		i++;
 	}
 }
-

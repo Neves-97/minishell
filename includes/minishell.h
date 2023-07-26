@@ -52,5 +52,7 @@ void	create_token(t_msh *data, int i);
 void	fill_array(int	*array);
 int		is_separator(char c);
 void	free_nodes(t_list *head);
+void	add_separator(t_msh *data, char	sep);
+char	*ft_strndup(const char *s, int n);
 
 #endif

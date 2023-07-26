@@ -22,7 +22,7 @@ t_list	*ft_lstmap(t_list *lst, char *(*f)(char *), void (*del)(char *))
 	new_list = NULL;
 	while (lst)
 	{
-		new_node = ft_lstnew(f(lst->content), 1);
+		new_node = ft_lstnew(f(lst->content));
 		if (!new_node)
 		{
 			ft_lstclear(&new_list, del);
