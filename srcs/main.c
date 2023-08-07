@@ -10,7 +10,6 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		data.input = readline("minishell:~$ ");
-		// data.input = "||echo   ola| wc    |323 f";
 		if (!(is_whtspc(data.input)))
 			add_history(data.input);
 		minishell(&data);

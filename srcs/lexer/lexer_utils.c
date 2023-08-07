@@ -48,7 +48,7 @@ void	free_nodes(t_list *head)
 	}
 }
 
-void	add_separator(t_msh *data, char	sep)
+void	add_separator(t_msh *data, char sep)
 {
 	char	*str;
 
