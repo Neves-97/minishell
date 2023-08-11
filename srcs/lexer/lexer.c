@@ -30,7 +30,7 @@ void	create_token(t_msh *data, int i)
 	}
 	str = ft_strndup(&data->input[i], limit - i);
 	if (!(is_whtspc(str)))
-		ft_lstadd_back(&(data->tokens), ft_lstnew(str));
+		ft_lstadd_back(&(data->tokens), ft_lstnew(str, 0));
 	else
 		free (str);
 }

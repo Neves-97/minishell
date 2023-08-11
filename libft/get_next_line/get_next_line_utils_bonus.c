@@ -12,7 +12,7 @@
 
 #include "get_next_line_bonus.h"
 
-char	*ft_strjoin(char *line, char *buffer)
+char	*ft_strjoin2(char *line, char *buffer)
 {
 	char	*newln;
 	int		i;

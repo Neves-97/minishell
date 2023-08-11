@@ -25,8 +25,40 @@ void	print_list(t_list *head)
 	tmp = head;
 	while (tmp)
 	{
-		printf("node %d:%s$\n", i, tmp->content);
+		printf("node %d:%s\ntype:  %d\n\n", i, tmp->content, tmp->type);
 		tmp = tmp->next;
 		i++;
 	}
+}
+
+void	free_ptp(char **ptp)
+{
+	int	i;
+
+	i = 0;
+	while (ptp && ptp[i])
+		free(ptp[i++]);
+	free(ptp);
+}
+
+char	**dup_ptp(char **ptp)
+{
+	int		i;
+	char	**split;
+
+	i = 0;
+	while (ptp && ptp[i])
+		i++;
+	split = ft_calloc(sizeof(char *), i + 1);
+	i = -1;
+	while (ptp[++i])
+		split[i] = ft_strdup(ptp[i]);
+	return (split);
+}
+
+t_msh	*get(void)
+{
+	static t_msh	data;
+
+	return (&data);
 }

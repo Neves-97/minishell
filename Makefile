@@ -20,12 +20,12 @@ GNL			=		./libft/get_next_line/*.c
 
 RM			=		rm -f
 
-SRC 		=		srcs/*.c srcs/lexer/*.c ./libft/ft_printf/srcs/*.c
+SRC 		=		srcs/*.c srcs/lexer/*.c srcs/parser/*.c ./libft/ft_printf/srcs/*.c
 
 all:		$(NAME)
 
 $(NAME):	$(LIBFT) $(SRC) $(FT_PRINTF)
-			$(CC) $(CFLAGS) $(SRC) $(FT_PRINTF) $(GNL) $(LIBFT) $(INCLUDES) -lreadline -o $(NAME)
+			$(CC) $(CFLAGS) $(SRC) $(GNL) $(LIBFT) $(INCLUDES) -lreadline -o $(NAME)
 		
 $(LIBFT):
 			make -C ./libft

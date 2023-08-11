@@ -55,7 +55,7 @@ void	add_separator(t_msh *data, char sep)
 	str = malloc(sizeof(char) + 1);
 	str[0] = sep;
 	str[1] = '\0';
-	ft_lstadd_back(&(data->tokens), ft_lstnew(str));
+	ft_lstadd_back(&(data->tokens), ft_lstnew(str, sep));
 }
 
 char	*ft_strndup(const char *s, int n)

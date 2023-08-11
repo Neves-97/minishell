@@ -28,7 +28,7 @@ char	*get_next_line_bonus(int fd)
 	{
 		i = 0;
 		y = 0;
-		line = ft_strjoin(line, buffer[fd]);
+		line = ft_strjoin2(line, buffer[fd]);
 		while (buffer[fd][i])
 		{
 			if (flag)
