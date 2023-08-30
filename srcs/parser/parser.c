@@ -3,5 +3,5 @@
 void	parser(void)
 {
 	get()->tokens_tmp = get()->tokens;
-	job();
+	get()->ast_tmp = job();
 }

@@ -7,9 +7,11 @@ t_ast	*command(void)
 	cmd_node = ast_new_node(AST_CMD);
 	if (!cmd_node)
 		return (NULL);
-	cmd_node->left = NULL;
-	cmd_node->right = NULL;
 	get()->ast_tmp = cmd_node;
-	token_list();
-	return (NULL);
+	if (!token_list())
+	{
+		free_ast(cmd_node);
+		return (NULL);
+	}
+	return (cmd_node);
 }

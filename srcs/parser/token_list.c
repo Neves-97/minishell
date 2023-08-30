@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 // redir block missing
 
 t_ast	*token_list(void)
@@ -18,8 +17,8 @@ t_ast	*token_list(void)
 		return (new_node);
 	get()->tokens_tmp = backup;
 	new_node = tl_case2();
-	// if (new_node)
-	// 	return (new_node);
+	if (new_node)
+		return (new_node);
 	return (NULL);
 }
 
@@ -31,7 +30,6 @@ t_ast	*tl_case1(void)
 
 	if (!get()->ast_tmp->content)
 	{
-		// check if the current lexer token is arg
 		if (get()->tokens_tmp->type == 0)
 		{
 			cmd = ft_strdup(get()->tokens_tmp->content);
@@ -51,7 +49,7 @@ t_ast	*tl_case2(void)
 	char	*arg;
 	t_ast	*node;
 
-	if (!get()->tokens_tmp->type == 0)
+	if (!get()->tokens_tmp || !get()->tokens_tmp->type == 0)
 		return (NULL);
 	node = ast_new_node(AST_ARG);
 	arg = ft_strdup(get()->tokens_tmp->content);
@@ -63,5 +61,3 @@ t_ast	*tl_case2(void)
 	ast_add_node(get()->ast_tmp, node, 1);
 	return (node);
 }
-
-

@@ -72,10 +72,12 @@ void	parser(void);
 // job.c
 t_ast	*job(void);
 t_ast	*j_case1(void);
+t_ast	*j_case2(void);
 
 // ast_utils.c
 t_ast	*ast_new_node(int type);
 void	ast_add_node(t_ast	*parent, t_ast	*child, int right);
+void	*free_ast(t_ast	*head);
 
 // command.c
 t_ast	*command(void);

@@ -5,6 +5,7 @@ void	minishell(t_msh *data)
 	lexer(data);
 	parser();
 	print_ast(get()->ast_tmp, 0);
+	free_ast(get()->ast_tmp);
 	free_nodes(data->tokens);
 }
 
@@ -29,7 +30,7 @@ int	main(int ac, char **av, char **envp)
 	// 	free (data.input);
 	// }
 	if (ac != 2)
-		return 1;
+		return (1);
 	get()->input = av[1];
 	minishell(get());
 }
