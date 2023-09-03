@@ -9,12 +9,13 @@
 # include "../libft/ft_printf/srcs/ft_printf.h"
 # include "../libft/get_next_line/get_next_line.h"
 
-typedef struct s_ast t_ast; 
+typedef struct s_ast	t_ast; 
 
 # define AST_CMD	0
 # define AST_ARG	1
 # define AST_PIPE	124
-
+# define AST_AND	38
+# define AST_OR		2
 
 typedef struct s_msh
 {
@@ -25,6 +26,7 @@ typedef struct s_msh
 	t_ast	*ast_root;
 	t_list	*tokens_tmp;
 	t_list	*tokens;
+	t_ast	*tmp;
 }	t_msh;
 
 typedef struct s_ast
@@ -34,8 +36,6 @@ typedef struct s_ast
 	t_ast	*left;
 	t_ast	*right;
 }	t_ast;
-
-
 
 //main.c
 void	minishell(t_msh *data);
@@ -69,15 +69,21 @@ char	*ft_strndup(const char *s, int n);
 // parser.c
 void	parser(void);
 
-// job.c
-t_ast	*job(void);
-t_ast	*j_case1(void);
-t_ast	*j_case2(void);
-
 // ast_utils.c
 t_ast	*ast_new_node(int type);
 void	ast_add_node(t_ast	*parent, t_ast	*child, int right);
 void	*free_ast(t_ast	*head);
+
+// and_or.c
+t_ast	*and_or(void);
+t_ast	*ao_case1(void);
+t_ast	*ao_case2(void);
+t_ast	*ao_case3(void);
+
+// job.c
+t_ast	*job(void);
+t_ast	*j_case1(void);
+t_ast	*j_case2(void);
 
 // command.c
 t_ast	*command(void);

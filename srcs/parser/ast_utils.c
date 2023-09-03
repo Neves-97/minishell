@@ -16,28 +16,29 @@ t_ast	*ast_new_node(int type)
 
 void	ast_add_node(t_ast	*parent, t_ast	*child, int right)
 {
-	t_ast	*tmp;
-
 	if (!parent || !child)
 		return ;
 	if (right)
 	{
 		if (parent->right)
 		{
-			tmp = parent->right;
+			get()->tmp = parent->right;
 			parent->right = child;
-			child->right = tmp;
+			child->right = get()->tmp;
 		}
 		else
 			parent->right = child;
-		// child->left = NULL;
 	}
 	else
 	{
-		tmp = parent->left;
-		parent->left = child;
-		child->left = tmp;
-		// child->right = NULL;
+		if (parent->left)
+		{
+			get()->tmp = parent->left;
+			parent->left = child;
+			child->left = get()->tmp;
+		}
+		else
+			parent->left = child;
 	}
 }
 

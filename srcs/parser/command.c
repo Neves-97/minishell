@@ -9,9 +9,6 @@ t_ast	*command(void)
 		return (NULL);
 	get()->ast_tmp = cmd_node;
 	if (!token_list())
-	{
-		free_ast(cmd_node);
-		return (NULL);
-	}
+		return (free_ast(cmd_node));
 	return (cmd_node);
 }

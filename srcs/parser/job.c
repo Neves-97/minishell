@@ -55,7 +55,7 @@ t_ast	*j_case2(void)
 	new_node = command();
 	if (!new_node)
 		return (NULL);
-	if (get()->tokens_tmp)
+	if ((get()->tokens_tmp && !(get()->tokens_tmp->next)))
 		return (free_ast(new_node));
 	return (new_node);
 }
