@@ -31,8 +31,10 @@ t_ast	*ao_case1(void)
 	job_node = job();
 	if (!job_node)
 		return (NULL);
-	if (!get()->tokens_tmp || (get()->tokens_tmp->type != AST_AND \
-		|| get()->tokens_tmp->next->type != AST_AND))
+	if (!get()->tokens_tmp || !get()->tokens_tmp->next)
+		return (free_ast(job_node));
+	if (get()->tokens_tmp->type != AST_AND || \
+		get()->tokens_tmp->next->type != AST_AND)
 		return (free_ast(job_node));
 	new_node = ast_new_node(AST_AND);
 	if (!new_node)
@@ -59,8 +61,10 @@ t_ast	*ao_case2(void)
 	job_node = job();
 	if (!job_node)
 		return (NULL);
-	if (!get()->tokens_tmp || get()->tokens_tmp->type != AST_PIPE \
-	|| get()->tokens_tmp->next->type != AST_PIPE)
+	if (!get()->tokens_tmp || !get()->tokens_tmp->next)
+		return (free_ast(job_node));
+	if (get()->tokens_tmp->type != AST_PIPE || \
+		get()->tokens_tmp->next->type != AST_PIPE)
 		return (free_ast(job_node));
 	new_node = ast_new_node(AST_OR);
 	if (!new_node)
@@ -88,7 +92,7 @@ t_ast	*ao_case3(void)
 	if (!new_node)
 		return (NULL);
 	if (get()->tokens_tmp)
-		if (get()->tokens_tmp->type == AST_AND || \
+		if (get()->tokens_tmp->type == AST_AND || 
 			get()->tokens_tmp->type == AST_PIPE)
 			return (free_ast(new_node));
 	return (new_node);

@@ -44,18 +44,18 @@ t_ast	*j_case1(void)
 	return (new_node);
 }
 
-// // <command>
+// <command>
 
 t_ast	*j_case2(void)
 {
 	t_ast	*new_node;
 
-	if (!get()->tokens_tmp || get()->tokens_tmp->type != AST_CMD)
-		return (NULL);
 	new_node = command();
 	if (!new_node)
 		return (NULL);
-	if ((get()->tokens_tmp && !(get()->tokens_tmp->next)))
+	if (get()->tokens_tmp && get()->tokens_tmp->type != AST_AND && \
+	get()->tokens_tmp->type != AST_PIPE)
 		return (free_ast(new_node));
 	return (new_node);
 }
+// відмінювання слів

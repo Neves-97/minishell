@@ -16,6 +16,12 @@ typedef struct s_ast	t_ast;
 # define AST_PIPE	124
 # define AST_AND	38
 # define AST_OR		2
+# define AST_IN		60
+# define AST_OUT	62
+# define AST_RDO_AP	3
+# define AST_RDO_TR 4
+# define AST_RDI_HD	5
+# define AST_RDI	6
 
 typedef struct s_msh
 {
@@ -62,12 +68,13 @@ void	create_token(t_msh *data, int i);
 // lexer_utils.c
 void	fill_array(int	*array);
 int		is_separator(char c);
-void	free_nodes(t_list *head);
+void	free_nodes(void);
 void	add_separator(t_msh *data, char sep);
 char	*ft_strndup(const char *s, int n);
 
 // parser.c
 void	parser(void);
+void	correct_redir(t_ast *head);
 
 // ast_utils.c
 t_ast	*ast_new_node(int type);
@@ -92,5 +99,21 @@ t_ast	*command(void);
 t_ast	*token_list(void);
 t_ast	*tl_case1(void);
 t_ast	*tl_case2(void);
+t_ast	*tl_case3(void);
+
+// redir.c
+t_ast	*redir(void);
+t_ast	*redir_case1(void);
+t_ast	*redir_case2(void);
+
+// redir_in.c
+t_ast	*redir_in(void);
+t_ast	*redir_in_case1(void);
+t_ast	*redir_in_case2(void);
+
+// redir_out.c
+t_ast	*redir_out(void);
+t_ast	*redir_out_case1(void);
+t_ast	*redir_out_case2(void);
 
 #endif

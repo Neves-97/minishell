@@ -1,7 +1,5 @@
 #include "minishell.h"
 
-// redir block missing
-
 t_ast	*token_list(void)
 {
 	t_list	*backup;
@@ -17,6 +15,10 @@ t_ast	*token_list(void)
 		return (new_node);
 	get()->tokens_tmp = backup;
 	new_node = tl_case2();
+	if (new_node)
+		return (new_node);
+	get()->tokens_tmp = backup;
+	new_node = tl_case3();
 	if (new_node)
 		return (new_node);
 	return (NULL);
@@ -60,4 +62,25 @@ t_ast	*tl_case2(void)
 	token_list();
 	ast_add_node(get()->ast_tmp, node, 1);
 	return (node);
+}
+
+// <redir> <token list>
+
+t_ast	*tl_case3(void)
+{
+	t_ast	*new_node;
+
+	new_node = redir();
+	if (!new_node)
+		return (NULL);
+	if (!get()->ast_tmp->content)
+	{
+		get()->ast_tmp->content = new_node->content;
+		free (new_node);
+		token_list();
+		return (get()->ast_tmp);
+	}
+	token_list();
+	ast_add_node(get()->ast_tmp, new_node, 0);
+	return (new_node);
 }
