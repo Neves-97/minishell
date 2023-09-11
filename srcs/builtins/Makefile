@@ -1,43 +1,63 @@
-NAME		=		minishell
+#  |  |  ___ \    \  |         |
+#  |  |     ) |  |\/ |   _  |  |  /   _ 
+# ___ __|  __/   |   |  (   |    <    __/ 
+#    _|  _____| _|  _| \__,_| _|\_\ \___|
+#                              by jcluzet
+################################################################################
+#                                     CONFIG                                   #
+################################################################################
 
-CC			=		cc
+NAME        := minishell
+CC        := cc
+FLAGS    := -Wall -Wextra -Werror 
+################################################################################
+#                                 PROGRAM'S SRCS                               #
+################################################################################
 
-CFLAGS		=		-Wall -Wextra -Werror -g
+SRCS        :=      set_up.c \
+                          create_ast.c \
+                          handle_cmds.c \
+                          is_builtin.c \
+                          redirs_1.c \
+                          execs.c \
+                          
+OBJS        := $(SRCS:.c=.o)
 
-INCLUDES	=		-I$(HEADERS_DIRECTORY) -I$(LIBFT_HEADERS) -I$(FT_PRINTF_HEADERS)
+.c.o:
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
-HEADERS_DIRECTORY = ./includes/
+################################################################################
+#                                  Makefile  objs                              #
+################################################################################
 
-LIBFT		=		./libft/libft.a
-LIBFT_INCLUDES =	../libft/libft.h
-LIBFT_HEADERS = 	$(LIBFT_INCLUDES)
 
-FT_PRINTF		=		./libft/ft_printf/libftprintf.a
-FT_PRINTF_INCLUDES=		./libft/ft_printf/srcs/ft_printf
-FT_PRINTF_HEADERS =		$(FT_PRINTF_INCLUDES)
+CLR_RMV		:= \033[0m
+RED		    := \033[1;31m
+GREEN		:= \033[1;32m
+YELLOW		:= \033[1;33m
+BLUE		:= \033[1;34m
+CYAN 		:= \033[1;36m
+RM		    := rm -f
 
-GNL			=		./libft/get_next_line/*.c
+${NAME}:	${OBJS}
+			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
+			${CC} ${FLAGS} -o ${NAME} ${OBJS}
+			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
-RM			=		rm -f
+all:		${NAME}
 
-SRC 		=		srcs/*.c srcs/lexer/*.c srcs/parser/*.c srcs/builtins/*.c srcs/errors/*.c ./libft/ft_printf/srcs/*.c
+bonus:		all
 
-all:		$(NAME)
+clean:
+			@ ${RM} *.o */*.o */*/*.o
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
 
-$(NAME):	$(LIBFT) $(SRC) $(FT_PRINTF)
-			$(CC) $(CFLAGS) $(SRC) $(GNL) $(LIBFT) $(INCLUDES) -lreadline -o $(NAME)
-		
-$(LIBFT):
-			make -C ./libft
+fclean:		clean
+			@ ${RM} ${NAME}
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
 
-clean:		
-			make clean -C ./libft
-			$(RM) $(NAME)
-fclean:
-			make fclean -C ./libft
-			$(RM) $(NAME)
+re:			fclean all
 
-re:		fclean	$(NAME)
+.PHONY:		all clean fclean re
 
-bonus:		$(BONUS)
-			
+

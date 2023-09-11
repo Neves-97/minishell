@@ -1,0 +1,18 @@
+total 88
+drwxrwxr-x 2 neves neves  4096 set 11 14:39 .
+drwxrwxr-x 4 neves neves  4096 set  9 13:08 ..
+-rw-rw-r-- 1 neves neves  2265 set 11 14:39 create_ast.c
+-rw-rw-r-- 1 neves neves  4256 set 11 14:39 create_ast.o
+-rw-rw-r-- 1 neves neves  1964 set 11 13:50 execs.c
+-rw-rw-r-- 1 neves neves  3744 set 11 14:38 execs.o
+-rw-rw-r-- 1 neves neves   251 set 11 14:39 handle_cmds.c
+-rw-rw-r-- 1 neves neves  1600 set 11 14:39 handle_cmds.o
+-rw-rw-r-- 1 neves neves  1768 set 11 14:16 is_builtin.c
+-rw-rw-r-- 1 neves neves   936 set 11 14:38 is_builtin.o
+-rw-rw-r-- 1 neves neves  1940 set 11 14:19 Makefile
+-rwxrwxr-x 1 neves neves 21632 set 11 14:39 minishell
+-rw-rw-r-- 1 neves neves     0 set 11 14:39 out.txt
+-rw-rw-r-- 1 neves neves  1696 set 11 14:25 redirs_1.c
+-rw-rw-r-- 1 neves neves  2928 set 11 14:38 redirs_1.o
+-rw-rw-r-- 1 neves neves  1750 set 11 14:23 set_up.c
+-rw-rw-r-- 1 neves neves  2584 set 11 14:38 set_up.o

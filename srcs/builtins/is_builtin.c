@@ -1,36 +1,36 @@
 #include "../../includes/minishell.h"
 
-bool is_builtin(t_token *cmd)
-{
-    if (ft_strlen(cmd->str) == 0)
-        return (false);
-    else if (ft_strncmp(cmd->str, "env", ft_strlen(cmd->str) + 1) == 0)
-        return (true);
-    else if (ft_strncmp(cmd->str, "pwd", ft_strlen(cmd->str) + 1) == 0)
-        return (true);
-    else if (ft_strncmp(cmd->str, "export", ft_strlen(cmd->str) + 1) == 0)
-        return (true);
-    else if (ft_strncmp(cmd->str, "unset", ft_strlen(cmd->str) + 1) == 0)
-        return (true);
-    else if (ft_strncmp(cmd->str, "echo", ft_strlen(cmd->str) + 1) == 0)
-        return (true);
-    else if (ft_strncmp(cmd->str, "cd", ft_strlen(cmd->str) + 1) == 0)
-        return (true);
-    else if (ft_strncmp(cmd->str, "exit", ft_strlen(cmd->str) + 1) == 0)
-        return (true);
-    else
-        return (false);
-}
+// bool is_builtin(t_token *cmd)
+// {
+//     if (ft_strlen(cmd->str) == 0)
+//         return (false);
+//     else if (ft_strncmp(cmd->str, "env", ft_strlen(cmd->str) + 1) == 0)
+//         return (true);
+//     else if (ft_strncmp(cmd->str, "pwd", ft_strlen(cmd->str) + 1) == 0)
+//         return (true);
+//     else if (ft_strncmp(cmd->str, "export", ft_strlen(cmd->str) + 1) == 0)
+//         return (true);
+//     else if (ft_strncmp(cmd->str, "unset", ft_strlen(cmd->str) + 1) == 0)
+//         return (true);
+//     else if (ft_strncmp(cmd->str, "echo", ft_strlen(cmd->str) + 1) == 0)
+//         return (true);
+//     else if (ft_strncmp(cmd->str, "cd", ft_strlen(cmd->str) + 1) == 0)
+//         return (true);
+//     else if (ft_strncmp(cmd->str, "exit", ft_strlen(cmd->str) + 1) == 0)
+//         return (true);
+//     else
+//         return (false);
+// }
 
-int ft_strcmp(const char *s1, const char *s2)
-{
-    int i = 0;
+// int ft_strcmp(const char *s1, const char *s2)
+// {
+//     int i = 0;
 
-    while (s1[i] && s2[i] && s1[i] == s2[i])
-        i++;
-    return (s1[i] - s2[i]);
+//     while (s1[i] && s2[i] && s1[i] == s2[i])
+//         i++;
+//     return (s1[i] - s2[i]);
 
-}
+// }
 
 // bool execute_buitins(t_cmd *cmd)
 // {
