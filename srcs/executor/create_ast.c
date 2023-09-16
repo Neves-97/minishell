@@ -87,6 +87,14 @@ void clean_tree(t_ast *root)
     free(root);
 }
 
+t_msh	*get(void)
+{
+	static t_msh	data;
+
+	return (&data);
+}
+
+
 int main(int argc, char **argv, char **envp)
 {
     t_ast *root = NULL;
