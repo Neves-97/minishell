@@ -10,30 +10,22 @@ void	minishell(t_msh *data)
 	free_ast(get()->ast_tmp);
 }
 
-void	setup(t_msh *data, char **envp)
-{
-	data->env = dup_ptp(envp);
-	data->export = dup_ptp(envp);
-	inc_shlvl(data->env);
-	free_ptp(data->env);
-	free_ptp(data->export);
-}
-
 int	main(int ac, char **av, char **envp)
 {
 	setup(get(), envp);
 	(void)ac;
 	(void)av;
+	ft_cd("..");
+	free_ptp(get()->env);
+	free_ptp(get()->export);
 	while (1)
 	{
 		get()->input = readline("minishell:~$ ");
+		if (!get()->input)
+			return (0);
 		if (!(is_whtspc(get()->input)))
 			add_history(get()->input);
 		minishell(get());
 		free(get()->input);
 	}
-	// if (ac != 2) 
-	// 	return (1);
-	// get()->input = av[1];
-	// minishell(get());
 }

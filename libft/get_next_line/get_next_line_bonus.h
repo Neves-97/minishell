@@ -23,7 +23,7 @@
 
 char	*get_next_line(int fd);
 char	*ft_strjoin2(char *line, char *buffer);
-int		ft_strlen(const char *str);
+int		ft_strlen2(const char *str);
 char	*ft_freebuffer(char *buffer, int fd);
 
 #endif

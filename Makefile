@@ -20,7 +20,7 @@ GNL			=		./libft/get_next_line/*.c
 
 RM			=		rm -f
 
-SRC 		=		srcs/*.c srcs/lexer/*.c srcs/parser/*.c ./libft/ft_printf/srcs/*.c
+SRC 		=		srcs/*.c srcs/lexer/*.c srcs/parser/*.c ./libft/ft_printf/srcs/*.c srcs/builtins/*.c
 
 all:		$(NAME)
 
@@ -39,5 +39,6 @@ fclean:
 
 re:		fclean	$(NAME)
 
-bonus:		$(BONUS)
+v:
+			make && valgrind --leak-check=full --show-leak-kinds=all --suppressions=".minishell.sup" ./minishell
 			

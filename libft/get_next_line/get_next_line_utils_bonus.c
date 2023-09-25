@@ -22,8 +22,8 @@ char	*ft_strjoin2(char *line, char *buffer)
 
 	if (!buffer)
 		return (NULL);
-	llen = ft_strlen(line);
-	blen = ft_strlen(buffer);
+	llen = ft_strlen2(line);
+	blen = ft_strlen2(buffer);
 	newln = malloc(sizeof newln * (llen + blen) + 1);
 	if (!newln)
 		return (NULL);
@@ -38,7 +38,7 @@ char	*ft_strjoin2(char *line, char *buffer)
 	return (newln);
 }
 
-int	ft_strlen(const char *str)
+int	ft_strlen2(const char *str)
 {
 	int	i;
 

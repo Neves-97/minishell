@@ -3,6 +3,8 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <unistd.h>
+# include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
@@ -33,6 +35,7 @@ typedef struct s_msh
 	t_list	*tokens_tmp;
 	t_list	*tokens;
 	t_ast	*tmp;
+	int		exit_status;
 }	t_msh;
 
 typedef struct s_ast
@@ -45,7 +48,6 @@ typedef struct s_ast
 
 //main.c
 void	minishell(t_msh *data);
-void	setup(t_msh *data, char **envp);
 t_msh	*get(void);
 
 // utils.c
@@ -58,7 +60,8 @@ t_msh	*get(void);
 // utils2.c
 void	print_ast(t_ast *root, int spaces);
 
-// env.c
+// setup.c
+void	setup(t_msh *data, char **envp);
 void	inc_shlvl(char **env);
 
 // lexer.c
@@ -115,5 +118,13 @@ t_ast	*redir_in_case2(void);
 t_ast	*redir_out(void);
 t_ast	*redir_out_case1(void);
 t_ast	*redir_out_case2(void);
+
+// builtins/
+int		ft_env(char **env);
+int		ft_pwd(void);
+int		ft_unset(char *arg);
+int		ft_export(char *arg);
+int		ft_echo(t_ast	*head);
+int		ft_cd(char	*arg);
 
 #endif
