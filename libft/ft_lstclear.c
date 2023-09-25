@@ -6,13 +6,13 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:05:51 by ratavare          #+#    #+#             */
-/*   Updated: 2023/05/20 17:27:23 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/06/20 23:04:45 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(int))
+void	ft_lstclear(t_list **lst, void (*del)(char *))
 {
 	t_list	*tmp;
 	t_list	*start;

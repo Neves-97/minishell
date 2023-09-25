@@ -13,21 +13,19 @@ LIBFT_INCLUDES =	../libft/libft.h
 LIBFT_HEADERS = 	$(LIBFT_INCLUDES)
 
 FT_PRINTF		=		./libft/ft_printf/libftprintf.a
-FT_PRINTF_INCLUDES=		./libft/ft_printf/srcs/ft_printf.h
+FT_PRINTF_INCLUDES=		./libft/ft_printf/srcs/ft_printf
 FT_PRINTF_HEADERS =		$(FT_PRINTF_INCLUDES)
 
 GNL			=		./libft/get_next_line/*.c
 
 RM			=		rm -f
 
-SRC 		=		srcs/*.c ./libft/ft_printf/srcs/*.c
-
-SRCB		=		./checker_src/*.c ./libft/get_next_line/*.c srcs/check.c srcs/error.c srcs/get_values.c srcs/instructions2.c srcs/instructions3.c srcs/instructions.c srcs/make_moves.c srcs/sort.c srcs/sort_utils.c srcs/utils.c
+SRC 		=		srcs/*.c srcs/executor/*.c srcs/lexer/*.c srcs/parser/*.c ./libft/ft_printf/srcs/*.c
 
 all:		$(NAME)
 
 $(NAME):	$(LIBFT) $(SRC) $(FT_PRINTF)
-			$(CC) $(CFLAGS) $(SRC) $(FT_PRINTF) $(LIBFT) $(INCLUDES) -o $(NAME)
+			$(CC) $(CFLAGS) $(SRC) $(GNL) $(LIBFT) $(INCLUDES) -lreadline -o $(NAME)
 		
 $(LIBFT):
 			make -C ./libft
@@ -38,7 +36,6 @@ clean:
 fclean:
 			make fclean -C ./libft
 			$(RM) $(NAME)
-			$(RM) $(BONUS)
 
 re:		fclean	$(NAME)
 

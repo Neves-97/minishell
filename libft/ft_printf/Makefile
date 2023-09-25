@@ -25,7 +25,7 @@ OBJ		=		$(SRC:.c=.o)
 all:			$(NAME)
 
 $(NAME):		$(OBJ)
-		ar rcs	$(NAME) $(OBJ)
+		@ar rcs	$(NAME) $(OBJ)
 
 clean:			
 				$(RM) $(OBJ) $(BOBJ)

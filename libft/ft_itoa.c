@@ -28,8 +28,8 @@ int	ft_nlen(long n)
 	}
 	while (n > 0)
 	{
-			n /= 10;
-			i++;
+		n /= 10;
+		i++;
 	}
 	return (i);
 }

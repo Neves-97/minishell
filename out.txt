@@ -1,0 +1,11 @@
+total 120
+drwxrwxr-x  5 neves neves  4096 set 21 14:53 .
+drwxr-x--- 35 neves neves  4096 set 21 00:24 ..
+drwxrwxr-x  2 neves neves  4096 set 20 10:56 includes
+drwxrwxr-x  4 neves neves  4096 set 21 14:28 libft
+-rw-rw-r--  1 neves neves   872 set 21 14:27 Makefile
+-rwxrwxr-x  1 neves neves 86064 set 21 14:53 minishell
+-rw-rw-r--  1 neves neves     0 set 21 14:53 out.txt
+-rw-rw-r--  1 neves neves  3002 set 20 10:45 README.md
+drwxrwxr-x  6 neves neves  4096 set 20 10:59 srcs
+-rw-rw-r--  1 neves neves  1666 set 20 10:47 syntax.txt
