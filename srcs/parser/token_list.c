@@ -51,7 +51,7 @@ t_ast	*tl_case2(void)
 	char	*arg;
 	t_ast	*node;
 
-	if (!get()->tokens_tmp || !get()->tokens_tmp->type == 0)
+	if (!get()->tokens_tmp || (!get()->tokens_tmp->type) == 0)
 		return (NULL);
 	node = ast_new_node(AST_ARG);
 	arg = ft_strdup(get()->tokens_tmp->content);

@@ -10,6 +10,18 @@ int	search_env(char *var)
 	return (i);
 }
 
+void	replace_pwd(void)
+{
+	char	cwd[PATH_MAX + 1];
+	char	*new_pwd;
+
+	getcwd(cwd, PATH_MAX + 1);
+	ft_unset("PWD");
+	new_pwd = ft_strjoin("PWD=", cwd);
+	ft_export(new_pwd);
+	free(new_pwd);
+}
+
 int	ft_cd(char	*arg)
 {
 	char	*dir;
@@ -30,7 +42,9 @@ int	ft_cd(char	*arg)
 		dir = ft_strjoin(dir_tmp, arg);
 		free (dir_tmp);
 	}
-	ft_printf("%s\n", dir);
+	if (chdir(dir) == -1)
+		write(2, "cd: No such file or directory\n", 30);
+	replace_pwd();
 	free (dir);
 	return (1);
 }

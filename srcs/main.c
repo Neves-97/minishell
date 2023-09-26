@@ -15,7 +15,9 @@ int	main(int ac, char **av, char **envp)
 	setup(get(), envp);
 	(void)ac;
 	(void)av;
-	ft_cd("..");
+	ft_cd("../..");
+	ft_pwd();
+	ft_env(get()->env);
 	free_ptp(get()->env);
 	free_ptp(get()->export);
 	while (1)
