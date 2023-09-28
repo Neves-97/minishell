@@ -1,5 +1,12 @@
 #include "minishell.h"
 
+void	setup(t_msh *data, char **envp)
+{
+	data->env = dup_ptp(envp);
+	data->export = dup_ptp(data->env);
+	inc_shlvl(data->env);
+}
+
 void	inc_shlvl(char **env)
 {
 	int		i;

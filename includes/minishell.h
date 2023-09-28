@@ -19,6 +19,7 @@
 # include <stdbool.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <limits.h>
 # include "../libft/libft.h"
 # include "../libft/ft_printf/srcs/ft_printf.h"
 # include "../libft/get_next_line/get_next_line.h"
@@ -38,7 +39,8 @@ typedef struct s_ast	t_ast;
 # define AST_RDI_HD	5
 # define AST_RDI	6
 
-// exit_status = integer exit code
+
+//  exit_status	= integer exit code
 // 	default_fd	= default file descriptors for I/O
 // 	env			= linked list for the copy of the environment variables
 // 	builtins	= builtin linked list
@@ -46,7 +48,7 @@ typedef struct s_ast	t_ast;
 // 	ast_root	= pointer to the address of the root node of the AST
 // 	ast_temp	= temporary AST_CMD node to attatch redirections and AST_ARG
 // 	token_list	= head of the token list
-// 	temp_token	= temporary t_token struct to build AST
+// 	temp_token	= temporary t_list struct to build AST
 
 
 
@@ -95,7 +97,7 @@ typedef struct s_msh
 	char	**env;
 	char	**export;
 	int		exit_status;
-	int 	final_pid;
+	int		final_pid;
 	t_ast	*ast_tmp;
 	t_ast	*ast_root;
 	t_list	*tokens_tmp;
@@ -111,11 +113,6 @@ typedef struct s_ast
 	t_ast	*left;
 	t_ast	*right;
 }	t_ast;
-
-typedef struct s_token
-{
-	char *str;
-}	t_token;
 
 typedef struct s_built
 {
@@ -152,8 +149,8 @@ typedef struct s_data
 	t_bool	malloc_flag;
 	t_ast	**ast_root;
 	t_ast	*ast_temp;
-	t_token	*token_list;
-	t_token	*temp_token;
+	t_list	*token_list;
+	t_list	*temp_token;
 	t_cmd	*free_cmd;
 }	t_data;	
 
@@ -231,11 +228,13 @@ t_ast	*redir_out(void);
 t_ast	*redir_out_case1(void);
 t_ast	*redir_out_case2(void);
 
-// execver
-void execute_command(char **args, char **envp);
-
-// errors / errors.c
-void execve_error(void);
+// builtins
+int	ft_cd(char	*arg);
+int	ft_echo(t_ast	*head);
+int	ft_env(char **env);
+int	ft_export(char *arg);
+int	ft_pwd(void);
+int	ft_unset(char *arg);
 
 // BUILTINS/create_ast
 t_ast *new_node(const char *data, int type);
@@ -291,7 +290,6 @@ void	parent_signals(void);
 // BUILTINS/wait.c
 
 void	wait_exec(void);
-
 int		executor();
 
 #endif

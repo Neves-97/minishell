@@ -47,7 +47,7 @@ t_ast	*redir_out_case2(void)
 	if (get()->tokens_tmp->type != AST_OUT)
 		return (NULL);
 	get()->tokens_tmp = get()->tokens_tmp->next;
-	if (!get()->tokens_tmp || (!get()->tokens_tmp->type) == 0)
+	if ((!get()->tokens_tmp) || (!get()->tokens_tmp->type) == 0)
 		return (NULL);
 	new_node = ast_new_node(AST_RDO_TR);
 	new_node->content = ft_strdup(get()->tokens_tmp->content);

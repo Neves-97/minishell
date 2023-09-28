@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-// bool is_builtin(t_token *cmd)
+// bool is_builtin(t_list *cmd)
 // {
 //     if (ft_strlen(cmd->str) == 0)
 //         return (false);
