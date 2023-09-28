@@ -229,12 +229,13 @@ t_ast	*redir_out_case1(void);
 t_ast	*redir_out_case2(void);
 
 // builtins
-int	ft_cd(char	*arg);
-int	ft_echo(t_ast	*head);
-int	ft_env(char **env);
-int	ft_export(char *arg);
-int	ft_pwd(void);
-int	ft_unset(char *arg);
+int		ft_cd(char	*arg);
+int		ft_echo(t_ast	*head);
+int		ft_env(char **env);
+int		ft_export(char *arg);
+int		ft_pwd(void);
+int		ft_unset(char *arg);
+int		ft_exit(void);
 
 // BUILTINS/create_ast
 t_ast *new_node(const char *data, int type);
