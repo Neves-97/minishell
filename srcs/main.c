@@ -19,10 +19,13 @@ int	main(int ac, char **av, char **envp)
 	{
 		get()->input = readline("minishell:~$ ");
 		if (!get()->input)
-			return (ft_exit());
+			break ;
 		if (!(is_whtspc(get()->input)))
 			add_history(get()->input);
 		minishell(get());
 		free(get()->input);
 	}
+	free_ptp(get()->env);
+	free_ptp(get()->export);
+	return (0);
 }

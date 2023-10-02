@@ -18,7 +18,7 @@ void	wait_exec(void)
 			{
 				get()->exit_status = WTERMSIG(wstatus) + 128;
 				//TODO: FIX ERROR MSG.
-                exit(EXIT_FAILURE);
+				exit(EXIT_FAILURE);
 			}
 		}
 	}
