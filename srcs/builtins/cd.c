@@ -2,11 +2,20 @@
 
 int	search_env(char *var)
 {
-	int	i;
+	int		i;
+	int		j;
 
 	i = 0;
-	while (get()->env[i] && ft_strncmp(get()->env[i], var, ft_strlen(var)))
+	j = 0;
+	while (get()->env[i])
+	{
+		while (get()->env[i][j] != '=')
+			j++;
+		if (!(ft_strncmp(get()->env[i], var, j)))
+			break ;
+		j = 0;
 		i++;
+	}
 	return (i);
 }
 

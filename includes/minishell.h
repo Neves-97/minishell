@@ -175,7 +175,7 @@ void	add_separator(t_msh *data, char sep);
 char	*ft_strndup(const char *s, int n);
 
 // expand.c
-void	expand(t_list *tokens);
+int	expand(t_list *tokens);
 
 // parser.c
 void	parser(void);

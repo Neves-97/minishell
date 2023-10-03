@@ -1,9 +1,15 @@
 #include "minishell.h"
 
+// void	delete_token(t_list	*tokens)
+// {
+	
+// }
+
 void	lexer(t_msh *data)
 {
 	int		i;
 	t_list	*tmp;
+	// t_list	*err;
 
 	i = 0;
 	while (data->input[i])

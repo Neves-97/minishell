@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	replace_env_var(char *var, t_list *tokens)
+char	*replace_env_var(char *var)
 {
 	int	pos;
 	int	max;
@@ -11,12 +11,11 @@ void	replace_env_var(char *var, t_list *tokens)
 	max = pos;
 	pos = search_env(var + 1);
 	if (pos < max)
-		tokens->content = ft_strdup(get()->env[pos] + ft_strlen(var));
-	else
-		tokens->content = NULL;
+		return (ft_strdup(get()->env[pos] + ft_strlen(var)));
+	return (NULL);
 }
 
-void	expand(t_list *tokens)
+int	expand(t_list *tokens)
 {
 	int		i;
 	char	*tmp;
@@ -28,8 +27,11 @@ void	expand(t_list *tokens)
 		{
 			tmp = ft_strdup(tokens->content);
 			free (tokens->content);
-			replace_env_var(tmp, tokens);
+			tokens->content = replace_env_var(tmp);
 			free (tmp);
+			if (!tokens->content)
+				return (0);
 		}
 	}
+	return (1);
 }
