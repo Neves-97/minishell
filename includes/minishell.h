@@ -184,6 +184,9 @@ void	free_nodes(void);
 void	add_separator(t_msh *data, char sep);
 char	*ft_strndup(const char *s, int n);
 
+// expand.c
+void	expand(t_list *tokens);
+
 // parser.c
 void	parser(void);
 void	correct_redir(t_ast *head);
@@ -236,6 +239,7 @@ int		ft_export(char *arg);
 int		ft_pwd(void);
 int		ft_unset(char *arg);
 int		ft_exit(void);
+int		search_env(char *var);
 
 // BUILTINS/create_ast
 t_ast *new_node(const char *data, int type);

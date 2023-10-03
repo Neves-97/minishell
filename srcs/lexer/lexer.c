@@ -2,7 +2,8 @@
 
 void	lexer(t_msh *data)
 {
-	int	i;
+	int		i;
+	t_list	*tmp;
 
 	i = 0;
 	while (data->input[i])
@@ -12,6 +13,13 @@ void	lexer(t_msh *data)
 			create_token(data, i);
 		i++;
 	}
+	tmp = data->tokens;
+	while (data->tokens)
+	{
+		expand(data->tokens);
+		data->tokens = data->tokens->next;
+	}
+	data->tokens = tmp;
 }
 
 void	create_token(t_msh *data, int i)
