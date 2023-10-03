@@ -25,7 +25,7 @@
 # include "../libft/get_next_line/get_next_line.h"
 # include "ft_bool.h"
 
-typedef struct s_ast	t_ast; 
+typedef struct s_ast	t_ast;
 
 # define AST_CMD	0
 # define AST_ARG	1
@@ -39,7 +39,6 @@ typedef struct s_ast	t_ast;
 # define AST_RDI_HD	5
 # define AST_RDI	6
 
-
 //  exit_status	= integer exit code
 // 	default_fd	= default file descriptors for I/O
 // 	env			= linked list for the copy of the environment variables
@@ -50,20 +49,24 @@ typedef struct s_ast	t_ast;
 // 	token_list	= head of the token list
 // 	temp_token	= temporary t_list struct to build AST
 
+// NODE_RED_IN, // <
+//	NODE_RED_HD, // <<
+//	NODE_RED_OTR, // >
+//	NODE_RED_OAP, // >>
+//	NODE_PIPE, // |
 
+// enum e_NodeType
+// {
+// 	NODE_COMMAND,
+// 	NODE_ARGUMENT,
+// 	NODE_RED_IN,
+// 	NODE_RED_HD,
+// 	NODE_RED_OTR,
+// 	NODE_RED_OAP,
+// 	NODE_PIPE,
+// };
 
-enum NodeType 
-{
-    NODE_COMMAND,
-    NODE_ARGUMENT,
-    NODE_RED_IN,    // <
-    NODE_RED_HD,    // <<
-    NODE_RED_OTR,   // >
-    NODE_RED_OAP,   // >>
-	NODE_PIPE,		// |
-};
-
-enum io_cmd_type
+enum e_io_cmd_type
 {
 	SINGLE_CMD,
 	FIRST_CMD,
@@ -78,18 +81,7 @@ enum io_cmd_type
 #  define WRITE 1
 # endif
 
-
-// typedef struct s_msh
-// {
-// 	char	*input;
-// 	char	**env;
-// 	char	**export;
-// 	t_ast	*ast_tmp;
-// 	t_ast	*ast_root;
-// 	t_list	*tokens_tmp;
-// 	t_list	*tokens;
-// 	t_ast	*tmp;
-// }	t_msh;
+// EOF CTRL D
 
 typedef struct s_msh
 {
@@ -104,7 +96,6 @@ typedef struct s_msh
 	t_list	*tokens;
 	t_ast	*tmp;
 }	t_msh;
-
 
 typedef struct s_ast
 {
@@ -153,7 +144,6 @@ typedef struct s_data
 	t_list	*temp_token;
 	t_cmd	*free_cmd;
 }	t_data;	
-
 
 //main.c
 void	minishell(t_msh *data);
@@ -242,48 +232,44 @@ int		ft_exit(void);
 int		search_env(char *var);
 
 // BUILTINS/create_ast
-t_ast *new_node(const char *data, int type);
-t_ast *insert(t_ast *root, const char *data, int type);
-int count_cmds(t_ast *root);
-void print_array(char **arr);
-void clean_tree(t_ast *root);
-int main(int argc, char **argv, char **envp);
+int		main(int argc, char **argv, char **envp);
+int		count_cmds(t_ast *root);
 
 // BUILTINS/execs.c
 
-void    execute_job(t_ast *root);
-void exec_ast(t_ast *root);
-void exec_cmd(t_cmd *cmd);
+void	execute_job(t_ast *root);
+void	exec_ast(t_ast *root);
+void	exec_cmd(t_cmd *cmd);
 
 // BUILTINS/handle_cmds.c
 
-void handle_normal_cmd(t_cmd *cmd);
-void    handle_command(t_ast *root, t_io *io);
+void	handle_normal_cmd(t_cmd *cmd);
+void	handle_command(t_ast *root, t_io *io);
 
 // BUILTINS/redirs_1.c
 
-int out_tr_redir(t_ast *node, int *out_fd);
-int out_ap_redir(t_ast *node, int *out_fd);
-int in_redir(t_ast *node, int *in_fd);
-int heredoc_redir(t_ast *node, int *fd);
+int		out_tr_redir(t_ast *node, int *out_fd);
+int		out_ap_redir(t_ast *node, int *out_fd);
+int		in_redir(t_ast *node, int *in_fd);
+int		heredoc_redir(t_ast *node, int *fd);
 
 // BUILTINS/redirs_setup.c
 
-int setup_redir_cases(t_ast *node, int *in_fd, int *out_fd);
-int setup_file_redir(t_cmd *cmd, t_bool is_parent);
+int		setup_redir_cases(t_ast *node, int *in_fd, int *out_fd);
+int		setup_file_redir(t_cmd *cmd, t_bool is_parent);
 
 // BUILTINS/set_up.c
 
-void    setup_pipe_bools(t_io *io);
-t_io    *setup_io(int io_type, int pipe_fd[2], int read_fd);
-char **create_args(t_ast *root, t_cmd *cmd);
-void    setup_cmd(t_ast *root, t_io *io, t_cmd *cmd);
-int setup_redir(t_cmd *cmd, t_bool is_parent);
+void	setup_pipe_bools(t_io *io);
+t_io	*setup_io(int io_type, int pipe_fd[2], int read_fd);
+char	**create_args(t_ast *root, t_cmd *cmd);
+void	setup_cmd(t_ast *root, t_io *io, t_cmd *cmd);
+int		setup_redir(t_cmd *cmd, t_bool is_parent);
 
 // BUILTINS/pipes.c
 
-void    setup_pipe_bools(t_io *io);
-void    execute_pipe(t_ast *root);
+void	setup_pipe_bools(t_io *io);
+void	execute_pipe(t_ast *root);
 
 // SIGNALS/signal_handle.c
 
@@ -295,6 +281,6 @@ void	parent_signals(void);
 // BUILTINS/wait.c
 
 void	wait_exec(void);
-int		executor();
+int		executor(void);
 
 #endif
