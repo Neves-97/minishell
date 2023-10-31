@@ -27,6 +27,9 @@
 
 typedef struct s_ast	t_ast;
 
+# define SNGL_QT	-1
+# define DOBL_QT	-2
+
 # define AST_CMD	0
 # define AST_ARG	1
 # define AST_PIPE	124
@@ -85,6 +88,7 @@ enum e_io_cmd_type
 
 typedef struct s_msh
 {
+	char	c;
 	char	*input;
 	char	**env;
 	char	**export;
@@ -165,17 +169,25 @@ void	inc_shlvl(char **env);
 
 // lexer.c
 void	lexer(t_msh *data);
-void	create_token(t_msh *data, int i);
+void	create_token(t_msh *data, int start, int i);
+void	delete_empty_tokens(t_list **head);
 
 // lexer_utils.c
 void	fill_array(int	*array);
-int		is_separator(char c);
+int		is_separator(char c, char *quote);
 void	free_nodes(void);
 void	add_separator(t_msh *data, char sep);
 char	*ft_strndup(const char *s, int n);
 
 // expand.c
-int	expand(t_list *tokens);
+void	quote_and_expand(t_list *tokens);
+
+// quotes.c
+char	*strip_quotes(char *content, char *q);
+int		check_quote_state(char *arg);
+
+// inc_split.c
+char	**inc_split(char const *s, char c);
 
 // parser.c
 void	parser(void);

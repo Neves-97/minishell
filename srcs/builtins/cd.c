@@ -11,7 +11,9 @@ int	search_env(char *var)
 	{
 		while (get()->env[i][j] != '=')
 			j++;
-		if (!(ft_strncmp(get()->env[i], var, j)))
+		// printf("j: %d\n", j);
+		// printf("env var: %s\n", get()->env[i]);
+		if (!(strncmp(get()->env[i], var, j)) && j == ((int)ft_strlen(var)))
 			break ;
 		j = 0;
 		i++;

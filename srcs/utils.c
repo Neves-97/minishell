@@ -23,11 +23,14 @@ void	print_list(t_list *head)
 
 	i = 1;
 	tmp = head;
-	while (tmp)
+	if (tmp)
 	{
-		printf("node %d:%s\ntype:  %d\n\n", i, tmp->content, tmp->type);
-		tmp = tmp->next;
-		i++;
+		while (tmp)
+		{
+			printf("node %d:%s%%\ntype:  %d\n\n", i, tmp->content, tmp->type);
+			tmp = tmp->next;
+			i++;
+		}
 	}
 }
 

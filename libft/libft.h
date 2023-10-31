@@ -74,4 +74,6 @@ void		ft_lstclear(t_list **lst, void (*del)(char *));
 void		ft_lstiter(t_list *lst, void (*f)(char *));
 t_list		*ft_lstmap(t_list *lst, char *(*f)(char *), void (*del)(char *));
 
+int			ft_wordcount(const char *str, char c);
+
 #endif

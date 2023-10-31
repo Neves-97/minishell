@@ -20,17 +20,21 @@ void	fill_array(int	*array)
 	array[15] = '\0';
 }
 
-int	is_separator(char c)
+int	is_separator(char c, char *quote)
 {
 	int	type[16];
 	int	i;
 
+	if ((quote[0] == 0) && (c == '\"' || c == '\''))
+		quote[0] = c;
+	else if (quote[0] == c)
+		quote[0] = 0;
 	fill_array(type);
 	i = 0;
-	while (type[i])
+	while ((quote[0] == 0) && type[i])
 	{
 		if (c == type[i++])
-			return (type[i]);
+			return (1);
 	}
 	return (0);
 }
