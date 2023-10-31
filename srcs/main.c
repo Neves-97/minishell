@@ -3,10 +3,10 @@
 void	minishell(t_msh *data)
 {
 	lexer(data);
-	print_list(data->tokens);
+	// print_list(data->tokens);
 	parser();
-	print_ast(get()->ast_tmp, 0);
-	// executor();
+	// print_ast(get()->ast_tmp, 0);
+	executor();
 	free_nodes();
 	free_ast(get()->ast_tmp);
 }

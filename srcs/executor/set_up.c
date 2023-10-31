@@ -56,7 +56,6 @@ void	setup_cmd(t_ast *root, t_io *io, t_cmd *cmd)
 
 void	setup_pipe_redir(t_cmd *cmd, t_bool is_parent)
 {
-	(void) is_parent;
 	// TODO: IF SOMETHING IS NTO WORKING WITH BUILTINS, CHECK IS PARENT
 	if (!cmd->io->use_pipe[READ] && !cmd->io->use_pipe[WRITE])
 		return ;
@@ -64,9 +63,12 @@ void	setup_pipe_redir(t_cmd *cmd, t_bool is_parent)
 		dup2(cmd->io->read_fd, STDIN_FILENO);
 	if (cmd->io->use_pipe[WRITE])
 		dup2(cmd->io->pipe_fd[WRITE], STDOUT_FILENO);
-	close(cmd->io->read_fd);
-	close(cmd->io->pipe_fd[READ]);
-	close(cmd->io->pipe_fd[WRITE]);
+	if (!is_parent)
+	{
+		close(cmd->io->read_fd);
+		close(cmd->io->pipe_fd[READ]);
+		close(cmd->io->pipe_fd[WRITE]);
+	}
 }
 
 int	setup_redir(t_cmd *cmd, t_bool is_parent)

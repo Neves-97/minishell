@@ -1,42 +1,41 @@
-#include "minishell.h"
+// #include "../../includes/minishell.h"
+#include <stdio.h>
 
-int	echo_has_option(char *option)
+int	ft_echo(char **args)
 {
-	int	i;
-
-	i = 0;
-	if (option[i++] != '-')
-		return (0);
-	while (option[i])
-		if (option[i++] != 'n')
-			return (0);
-	return (1);
-}
-
-int	ft_echo(t_ast	*head)
-{
-	t_ast	*tmp;
 	int		new_line;
+	int		has_flag;
+	int		i;
 
-	if (!head)
-		return (0);
-	tmp = head;
-	if (!echo_has_option(head->content))
-		new_line = 1;
-	else
-	{
-		new_line = 0;
-		head = head->right;
+	(void) new_line;
+	has_flag = 1;
+	i = 1;
+	if (!args || !args[0])
+		return (1); // TODO: Update status code **arg
+	if (args[1] && args[1][0] == '-') {
+		while (args[1][i]) {
+			if (args[1][i] != 'n')
+				has_flag = 0;
+			i++;
+		}
+	} else {
+		has_flag = 0;
 	}
-	while (head)
-	{
-		write(1, head->content, ft_strlen(head->content));
-		if (head->right)
-			write(1, " ", 1);
-		head = head->right;
+	i = 1 + has_flag;
+	// char *final_str;
+	while (args[i]) {
+		printf("%s", args[i]);
+		if (args[i + 1])
+			printf(" ");
+		i++;
 	}
-	if (new_line)
-		write(1, "\n", 1);
-	head = tmp;
-	return (1);
+	if (!has_flag)
+		printf("\n");
+	return (0);
 }
+
+// int main(int argc, char **argv) {
+// 	if (argc < 2) return 1;
+// 	ft_echo(++argv);
+// 	return 0;
+// }

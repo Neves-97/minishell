@@ -1,5 +1,7 @@
 NAME		=		minishell
 
+$(VERBOSE).SILENT:
+
 CC			=		cc
 
 CFLAGS		=		-Wall -Wextra -Werror -g

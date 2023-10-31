@@ -10,7 +10,7 @@ int	setup_redir_cases(t_ast *node, int *in_fd, int *out_fd)
 		return (in_redir(node, in_fd));
 	else if (node->type == AST_RDI_HD)
 		return (heredoc_redir(node, in_fd));
-	return (-1);
+	return (1);
 }
 
 int	setup_file_redir(t_cmd *cmd, t_bool is_parent)
@@ -40,28 +40,3 @@ int	setup_file_redir(t_cmd *cmd, t_bool is_parent)
 	}
 	return (0);
 }
-
-// 	static int  file_redir(t_ast *node, int *in_fd, int *out_fd, int type)
-// {
-//     if (type == NODE_RED_IN)
-//     {
-//         if (!in_redir(node, in_fd))
-//             return (0);
-//     }
-//     else if (type == NODE_RED_HD)
-//     {
-//         if (!heredoc_redir(node, in_fd))
-//             return (0);
-//     }
-//     else if (type == NODE_RED_OTR)
-//     {
-//         if (!out_tr_redir(node, out_fd))
-//             return (0);
-//     }
-//     else if (type == NODE_RED_OAP)
-//     {
-//         if (!out_ap_redir(node, out_fd))
-//             return (0);
-//     }
-//     return (1);
-// }

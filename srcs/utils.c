@@ -63,3 +63,12 @@ t_msh	*get(void)
 
 	return (&data);
 }
+
+void print_env(char **env) {
+	if (!env) {
+		printf("Foda-se\n");
+		return ;
+	}
+	for (int i = 0; env[i]; i++)
+		printf("%s\n", env[i]);
+}
