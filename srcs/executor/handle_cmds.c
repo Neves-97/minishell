@@ -10,5 +10,6 @@ void	handle_command(t_ast *root, t_io *io)
 	{
 		setup_cmd(root, io, &cmd);
 		exec_cmd(&cmd);
+		// free(&cmd);
 	}
 }

@@ -19,6 +19,7 @@
 # include <stdbool.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <limits.h>
 # include "../libft/libft.h"
 # include "../libft/ft_printf/srcs/ft_printf.h"
@@ -27,20 +28,19 @@
 
 typedef struct s_ast	t_ast;
 
-# define SNGL_QT	-1
-# define DOBL_QT	-2
-
-# define AST_CMD	0
-# define AST_ARG	1
-# define AST_PIPE	124
-# define AST_AND	38
-# define AST_OR		2
-# define AST_IN		60
-# define AST_OUT	62
-# define AST_RDO_AP	3
-# define AST_RDO_TR 4
-# define AST_RDI_HD	5
+# define AST_CMD	0 
+# define AST_ARG	1 
+# define AST_PIPE	124 
+# define AST_AND	38 
+# define AST_OR		2 
+# define AST_IN		60 
+# define AST_OUT	62 
+# define AST_RDO_AP	3 
+# define AST_RDO_TR 4 
+# define AST_RDI_HD	5 
 # define AST_RDI	6
+
+# define PATH_MAX 4096
 
 //  exit_status	= integer exit code
 // 	default_fd	= default file descriptors for I/O
@@ -86,6 +86,27 @@ enum e_io_cmd_type
 
 // EOF CTRL D
 
+// typedef struct s_msh
+// {
+// 	char	*input;
+// 	char	**env;
+// 	char	**export;
+// 	int		exit_status;
+// 	int		final_pid;
+// 	t_ast	*ast_tmp;
+// 	t_ast	*ast_root;
+// 	t_list	*tokens_tmp;
+// 	t_list	*tokens;
+// 	t_ast	*tmp;
+// }	t_msh;
+
+typedef struct s_built
+{
+	char			*cmd;
+	int				(*f)(char **str);
+	struct s_built	*next;
+}	t_built;
+
 typedef struct s_msh
 {
 	char	c;
@@ -94,11 +115,14 @@ typedef struct s_msh
 	char	**export;
 	int		exit_status;
 	int		final_pid;
+	int		fd[2];
 	t_ast	*ast_tmp;
 	t_ast	*ast_root;
 	t_list	*tokens_tmp;
 	t_list	*tokens;
+	t_built	*builtins;
 	t_ast	*tmp;
+	t_bool	child;
 }	t_msh;
 
 typedef struct s_ast
@@ -109,12 +133,12 @@ typedef struct s_ast
 	t_ast	*right;
 }	t_ast;
 
-typedef struct s_built
-{
-	char			*cmd;
-	int				(*f)(char **str);
-	struct s_built	*next;
-}	t_built;
+// typedef struct s_built
+// {
+// 	char			*cmd;
+// 	int				(*f)(char **str);
+// 	struct s_built	*next;
+// }	t_built;
 
 typedef struct s_io
 {
@@ -132,22 +156,22 @@ typedef struct s_cmd
 	t_io	*io;
 }	t_cmd;
 
-typedef struct s_data
-{
-	int		exit_status;
-	int		default_fd[2];
-	char	*input;
-	pid_t	last_pid;
-	t_list	**env;
-	t_built	*builtins;
-	t_bool	child;
-	t_bool	malloc_flag;
-	t_ast	**ast_root;
-	t_ast	*ast_temp;
-	t_list	*token_list;
-	t_list	*temp_token;
-	t_cmd	*free_cmd;
-}	t_data;	
+// typedef struct s_data
+// {
+// 	int		exit_status;
+// 	int		default_fd[2];
+// 	char	*input;
+// 	pid_t	last_pid;
+// 	t_list	**env;
+// 	t_built	*builtins;
+// 	t_bool	child;
+// 	t_bool	malloc_flag;
+// 	t_ast	**ast_root;
+// 	t_ast	*ast_temp;
+// 	t_list	*token_list;
+// 	t_list	*temp_token;
+// 	t_cmd	*free_cmd;
+// }	t_data;	
 
 //main.c
 void	minishell(t_msh *data);
@@ -234,17 +258,17 @@ t_ast	*redir_out_case1(void);
 t_ast	*redir_out_case2(void);
 
 // builtins
-int		ft_cd(char	*arg);
-int		ft_echo(t_ast	*head);
+// int		ft_cd(char	**arg);
+int		ft_echo(char **args);
 int		ft_env(char **env);
 int		ft_export(char *arg);
-int		ft_pwd(void);
+int		ft_pwd(char **arg);
 int		ft_unset(char *arg);
-int		ft_exit(void);
+// int		ft_exit(void);
 int		search_env(char *var);
 
 // BUILTINS/create_ast
-int		main(int argc, char **argv, char **envp);
+// int		main(int argc, char **argv, char **envp);
 int		count_cmds(t_ast *root);
 
 // BUILTINS/execs.c
@@ -255,7 +279,7 @@ void	exec_cmd(t_cmd *cmd);
 
 // BUILTINS/handle_cmds.c
 
-void	handle_normal_cmd(t_cmd *cmd);
+//void	handle_normal_cmd(t_cmd *cmd, t_built *builtin);
 void	handle_command(t_ast *root, t_io *io);
 
 // BUILTINS/redirs_1.c
@@ -294,5 +318,68 @@ void	parent_signals(void);
 
 void	wait_exec(void);
 int		executor(void);
+
+// test
+
+t_built	*init_builtins(void);
+void add_builtin(t_built **list, char *cmd, int (*f)(char **));
+
+
+t_list	*ft_listilia(char *value);
+void	free_paths(char *new_path, char *cwd);
+int	incorrect_args(char **path);
+
+char	*get_home_dir(void);
+char	*get_tilda_path(char *path);
+char	*process_path(char *path);
+void	update_pwd(void);
+void	update_oldpwd(char *old);
+int	ft_cd(char **path);
+
+
+int	ft_exit(char **cmds);
+int	validate_code(char **cmds, int i);
+void	ft_lstclear1(t_list **lst, void (*del)(void *));
+void	ft_lstdelone1(t_list *lst, void (*del)(void *));
+
+
+
+char	*sub_tild_dir(char *relative);
+char	*search_path(char *cmd, char *env_path);
+int	is_directory(char *cmd);
+int	check_error(char *path);
+int	execute(t_cmd *cmd);
+char	*get_env_value(char *value);
+char	**get_argv_env(void);
+void	free_split(char **split);
+void print_env(char **env);
+
+
+// heredoc
+
+int	hd_command(t_ast *root);
+int	hd_pipe(t_ast *root);
+int	hd_job(t_ast *root);
+int	hd_and_or(t_ast *root);
+int	hd_cmd_line(t_ast *root);
+int	execute_hd(t_ast *root);
+
+
+void	exec_and_or(t_ast *root);
+
+
+void	parent_signals(void);
+
+void	heredoc_signals(void);
+
+void	sig_handler(int signum);
+
+
+void	exec_cmd_line(t_ast *root);
+
+int	execute_ast(t_ast *root);
+int	execute_hd(t_ast *root);
+void	execute_commands(t_ast *root);
+
 
 #endif

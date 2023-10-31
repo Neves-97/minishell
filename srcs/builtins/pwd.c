@@ -1,7 +1,8 @@
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
-int	ft_pwd(void)
+int	ft_pwd(char **arg)
 {
+	(void) arg;
 	char	cwd[PATH_MAX + 1];
 
 	if (getcwd(cwd, PATH_MAX + 1))

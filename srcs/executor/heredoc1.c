@@ -35,23 +35,23 @@ int	hd_input(char *eof, int fd)
 	pid = fork();
 	if (pid == -1)
 	{
-		// TODO: // exit statu
+		exit(EXIT_FAILURE);
 	}
 	if (pid == 0)
 	{
-		// heredoc_signals();
+		heredoc_signals();
 		here_run(eof, fd);
 	}
 	else
 	{
-		// ignore_signals();
+		ignore_signals();
 		waitpid(pid, &wstatus, 0);
 		if (WIFSIGNALED(wstatus) && WTERMSIG(wstatus) + 128 == 130)
 		{
 			ft_putchar_fd('\n', STDOUT_FILENO);
 			return (0);
 		}
-		// parent_signals();
+		parent_signals();
 	}
 	return (1);
 }
@@ -62,7 +62,7 @@ int	handle_hd(t_ast *redir)
 
 	fd = open(".heredoc", O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (fd == -1)
-		// TODO: // handle error
+		exit(EXIT_FAILURE);
 	if (!hd_input(redir->content, fd))
 	{
 		close(fd);
@@ -71,5 +71,41 @@ int	handle_hd(t_ast *redir)
 	free(redir->content);
 	redir->content = ft_strdup(".heredoc");
 	close(fd);
+	return (1);
+}
+
+int	hd_command(t_ast *root)
+{
+	t_ast	*redirection;
+
+	redirection = root->left;
+	while (redirection)
+	{
+		if (redirection->type == AST_RDI_HD)
+		{
+			if (!handle_hd(redirection))
+				return (0);
+		}
+		redirection = redirection->left;
+	}
+	return (1);
+}
+
+/* Execute the <pipe> syntax block */
+int	hd_pipe(t_ast *root)
+{
+	t_ast	*job;
+
+	if (!hd_command(root->left))
+		return (0);
+	job = root->right;
+	while (job && job->type == AST_PIPE)
+	{
+		if (!hd_command(job->left))
+			return (0);
+		job = job->right;
+	}
+	if (!hd_command(job))
+		return (0);
 	return (1);
 }

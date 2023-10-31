@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 int	ft_env(char **env)
 {
@@ -11,3 +11,4 @@ int	ft_env(char **env)
 		ft_printf("%s\n", env[i++]);
 	return (1);
 }
+
