@@ -25,7 +25,6 @@ char	**create_args(t_ast *root, t_cmd *cmd)
 	t_ast	*tmp;
 	char	**arr;
 	int		i;
-	// int		j;
 
 	arr = calloc(cmd->num_cmds + 1, sizeof(char *));
 	if (!arr)
@@ -39,13 +38,9 @@ char	**create_args(t_ast *root, t_cmd *cmd)
 		i++;
 	}
 	arr[i] = NULL;
-	// while (j < i) 
-	// {
-    //     free(arr[j]);
-	// 	j++;
-    // }
 	return (arr);
 }
+
 
 void	setup_cmd(t_ast *root, t_io *io, t_cmd *cmd)
 {
@@ -59,6 +54,32 @@ void	setup_cmd(t_ast *root, t_io *io, t_cmd *cmd)
 	}
 	cmd->cmds = create_args(root, cmd);
 }
+
+// void setup_cmd(t_ast *root, t_io *io, t_cmd *cmd)
+// {
+// 	cmd->io = io;
+//     cmd->io->redirection = root->left;
+//     if (!root || !io || !cmd)
+//         return ;
+//     if (cmd->cmds)
+// 	{
+//         free(cmd->cmds);
+//         cmd->cmds = NULL;
+//     }
+//     cmd->num_cmds = count_cmds(root);
+//     if (!root->content)
+//     {
+//         cmd->cmds = NULL;
+//         return;
+//     }
+//     cmd->cmds = create_args(root, cmd);
+//     if (!cmd->cmds)
+//     {
+//         free_cmd(cmd);
+//         return;
+//     }
+// }
+
 
 void	setup_pipe_redir(t_cmd *cmd, t_bool is_parent)
 {
