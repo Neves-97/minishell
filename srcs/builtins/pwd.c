@@ -13,3 +13,9 @@ int	ft_pwd(char **arg)
 	}
 	return (0);
 }
+
+void	printf_and_free(char *str)
+{
+	ft_printf("declare -x %s\n", str);
+	free (str);
+}

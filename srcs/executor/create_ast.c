@@ -65,11 +65,11 @@ t_built	*init_builtins(void)
 
 	head = NULL;
 	add_builtin(&head, "echo", ft_echo);
-	// add_builtin(&head, "cd", ft_cd);
+	add_builtin(&head, "cd", ft_cd);
 	add_builtin(&head, "pwd", ft_pwd);
-	// add_builtin(&head, "export", ft_export);
-	// add_builtin(&head, "unset", ft_unset);
+	add_builtin(&head, "export", ft_export);
+	add_builtin(&head, "unset", ft_unset);
 	add_builtin(&head, "env", ft_env);
-	// add_builtin(&head, "exit", ft_exit);
+	add_builtin(&head, "exit", ft_exit);
 	return (head);
 }

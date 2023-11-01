@@ -13,3 +13,16 @@ void	print_ast(t_ast *root, int spaces)
 	if (root->left)
 		print_ast(root->left, spaces + 5);
 }
+
+void	free_builtins(void)
+{
+	t_built	*tmp;
+
+	while (get()->builtins)
+	{
+		tmp = get()->builtins->next;
+		if (get()->builtins)
+			free (get()->builtins);
+		get()->builtins = tmp;
+	}
+}

@@ -27,6 +27,6 @@ int	main(int ac, char **av, char **envp)
 		free(get()->input);
 	}
 	free_ptp(get()->env);
-	free_ptp(get()->export);
+	free_builtins();
 	return (0);
 }

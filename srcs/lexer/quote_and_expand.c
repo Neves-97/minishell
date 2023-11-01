@@ -6,6 +6,8 @@ char	*replace_env_var(char *var)
 	int	max;
 	int	len;
 
+	if (var[0] == '?')
+		return (ft_itoa(get()->exit_status));
 	pos = 0;
 	while (get()->env[pos] != NULL)
 		pos++;
@@ -18,33 +20,33 @@ char	*replace_env_var(char *var)
 	return (NULL);
 }
 
-// TODO verificar caso: export ls="ls -la", $ls, "$ls"
-// handle $? e $$
-
-char	*expand(char *content, char *new_str, int *i, int *j)
+char	*expand(char *cont, char *ns, int *i, int *j)
 {
-	char	*new_str2;
+	char	*n2;
 	char	*exp;
 	int		start;
 	int		var_len;
 
 	start = i[0] + 1;
 	var_len = 0;
-	while (content[i[0]++] && ft_isalnum(content[i[0]]))
-		var_len++;
-	exp = replace_env_var(ft_strndup(content + start, var_len));
-	new_str2 = ft_strjoin(new_str, exp);
-	if (new_str2)
+	while (cont[i[0]++] && (ft_isalnum(cont[i[0]]) || cont[i[0]] == '?'))
 	{
-		free (new_str);
-		free (exp);
-		new_str = calloc(ft_strlen(new_str2) + \
-			ft_strlen(content + i[0]) + 1, sizeof(char));
-		ft_memcpy(new_str, new_str2, ft_strlen(new_str2));
-		free (new_str2);
-		j[0] = ft_strlen(new_str);
+		var_len++;
+		if (cont[i[0] + 1] == '?')
+			break ;
 	}
-	return (new_str);
+	exp = replace_env_var(ft_strndup(cont + start, var_len));
+	n2 = ft_strjoin(ns, exp);
+	if (n2)
+	{
+		free (ns);
+		free (exp);
+		ns = calloc(ft_strlen(n2) + ft_strlen(cont + i[0]) + 1, sizeof(char));
+		ft_memcpy(ns, n2, ft_strlen(n2));
+		free (n2);
+		j[0] = ft_strlen(ns);
+	}
+	return (ns);
 }
 
 char	*handle_quotes(char *content)
@@ -67,7 +69,8 @@ char	*handle_quotes(char *content)
 			q = 0;
 			i++;
 		}
-		else if (content[i] != '$' || (content[i] == '$' && q == '\''))
+		else if (content[i] != '$' || (content[i] == '$' && q == '\'') || \
+		(!ft_isalnum(content[i + 1]) && content[i + 1] != '?'))
 			new_str[j++] = content[i++];
 		if (content[i] == '$' && q != '\'')
 			new_str = expand(content, new_str, &i, &j);

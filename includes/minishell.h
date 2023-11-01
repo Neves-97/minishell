@@ -112,7 +112,6 @@ typedef struct s_msh
 	char	c;
 	char	*input;
 	char	**env;
-	char	**export;
 	int		exit_status;
 	int		final_pid;
 	int		fd[2];
@@ -187,6 +186,7 @@ t_msh	*get(void);
 
 // utils2.c
 void	print_ast(t_ast *root, int spaces);
+void	free_builtins(void);
 
 // env.c
 void	inc_shlvl(char **env);
@@ -258,12 +258,15 @@ t_ast	*redir_out_case1(void);
 t_ast	*redir_out_case2(void);
 
 // builtins
-// int		ft_cd(char	**arg);
+int		ft_cd(char	**arg);
 int		ft_echo(char **args);
 int		ft_env(char **env);
-int		ft_export(char *arg);
+int		ft_export(char **arg);
+int		ft_export_arg(char *arg);
+void	printf_and_free(char *str);
 int		ft_pwd(char **arg);
-int		ft_unset(char *arg);
+int		ft_unset(char **arg);
+void	ft_unset_arg(char *arg);
 // int		ft_exit(void);
 int		search_env(char *var);
 
@@ -334,8 +337,6 @@ char	*get_tilda_path(char *path);
 char	*process_path(char *path);
 void	update_pwd(void);
 void	update_oldpwd(char *old);
-int	ft_cd(char **path);
-
 
 int	ft_exit(char **cmds);
 int	validate_code(char **cmds, int i);
