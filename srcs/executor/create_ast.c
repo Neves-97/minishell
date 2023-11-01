@@ -26,7 +26,6 @@ int	executor(void)
 	root = get()->ast_tmp;
 	execute_hd(root);
 	exec_and_or(root);
-	// execute_commands(root);
 	return (0);
 }
 

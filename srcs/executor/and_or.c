@@ -20,15 +20,15 @@ void	exec_and_or(t_ast *root)
 		execute_job(root);
 }
 
-void	exec_cmd_line(t_ast *root)
-{
-	if (!root)
-		return ;
-	if (root->type == 1)
-	{
-		exec_and_or(root->left);
-		exec_cmd_line(root->right);
-	}
-	else
-		exec_and_or(root);
-}
+// void	exec_cmd_line(t_ast *root)
+// {
+// 	if (!root)
+// 		return ;
+// 	if (root->type == 1)
+// 	{
+// 		exec_and_or(root->left);
+// 		exec_cmd_line(root->right);
+// 	}
+// 	else
+// 		exec_and_or(root);
+// }

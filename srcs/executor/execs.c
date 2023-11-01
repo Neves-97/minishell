@@ -77,7 +77,7 @@ static int	handle_normal_cmd(t_cmd *cmd, t_built *builtin)
 }
 
 void	exec_cmd(t_cmd *cmd)
-{	
+{
 	t_built	*builtin;
 
 	if (!cmd->cmds[0])
