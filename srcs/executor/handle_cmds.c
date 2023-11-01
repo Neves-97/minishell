@@ -27,17 +27,17 @@
 
 void	free_cmd(t_cmd *cmd)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
+	// i = 0;
 	if (cmd->cmds)
 	{
-		while (i < cmd->num_cmds)
-		{
-			if (cmd->cmds[i])
-				free(cmd->cmds[i]);
-			i++;
-		}
+		// while (i < cmd->num_cmds)
+		// {
+		// 	if (cmd->cmds[i])
+		// 		free(cmd->cmds[i]);
+		// 	i++;
+		// }
 		free(cmd->cmds);
 		cmd->cmds = NULL;
 	}
@@ -59,6 +59,6 @@ void	handle_command(t_ast *root, t_io *io)
 	{
 		setup_cmd(root, io, &cmd);
 		exec_cmd(&cmd);
-		// free_cmd(&cmd);
+		free_cmd(&cmd);
 	}
 }
