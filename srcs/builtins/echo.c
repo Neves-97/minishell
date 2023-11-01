@@ -12,7 +12,8 @@ int	ft_echo(char **args)
 	i = 1;
 	if (!args || !args[0])
 		return (1); // TODO: Update status code **arg
-	if (args[1] && args[1][0] == '-') {
+	if (args[1] && args[1][0] == '-') 
+	{
 		while (args[1][i]) {
 			if (args[1][i] != 'n')
 				has_flag = 0;

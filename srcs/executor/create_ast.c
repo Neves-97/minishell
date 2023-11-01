@@ -19,21 +19,14 @@ int	count_cmds(t_ast *root)
 	return (counter);
 }
 
-// int	execute_hd(t_ast *root)
-// {
-// 	if (!hd_cmd_line(root))
-// 		return (0);
-// 	return (1);
-// }
-
 int	executor(void)
 {
 	t_ast	*root;
 
 	root = get()->ast_tmp;
-	// execute_hd(root);
-	// exec_and_or(root);
-	execute_commands(root);
+	execute_hd(root);
+	exec_and_or(root);
+	// execute_commands(root);
 	return (0);
 }
 

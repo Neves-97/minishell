@@ -6,7 +6,11 @@ int	out_tr_redir(t_ast *node, int *out_fd)
 		close(*out_fd);
 	*out_fd = open(node->content, O_CREAT | O_TRUNC | O_WRONLY, 0664);
 	if (*out_fd == -1)
-		exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+	{
+		free_tokens_ast();
+		fptp();
+		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+	}
 	return (0);
 }
 
@@ -16,7 +20,11 @@ int	out_ap_redir(t_ast *node, int *out_fd)
 		close(*out_fd);
 	*out_fd = open(node->content, O_CREAT | O_APPEND | O_WRONLY, 0664);
 	if (*out_fd == -1)
-		exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+	{
+		free_tokens_ast();
+		fptp();
+		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+	}
 	return (0);
 }
 
@@ -26,7 +34,11 @@ int	in_redir(t_ast *node, int *in_fd)
 		close(*in_fd);
 	*in_fd = open(node->content, O_RDONLY, 0664);
 	if (*in_fd == -1)
-		exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+	{
+		free_tokens_ast();
+		fptp();
+		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+	}
 	return (0);
 }
 
@@ -48,5 +60,5 @@ int	heredoc_redir(t_ast *node, int *fd)
 		perror("Error unlink");
 		exit(EXIT_FAILURE);
 	}
-	return (1);
+	return (0);
 }
