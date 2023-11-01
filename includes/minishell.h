@@ -382,5 +382,12 @@ int	execute_ast(t_ast *root);
 int	execute_hd(t_ast *root);
 void	execute_commands(t_ast *root);
 
+// free.c
+
+void	free_tokens_ast();
+void	fptp();
+
+
+void free_cmd(t_cmd *cmd);
 
 #endif

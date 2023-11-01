@@ -7,7 +7,10 @@ char	*replace_env_var(char *var)
 	int	len;
 
 	if (var[0] == '?')
+	{
+		free (var);
 		return (ft_itoa(get()->exit_status));
+	}
 	pos = 0;
 	while (get()->env[pos] != NULL)
 		pos++;

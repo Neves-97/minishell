@@ -25,6 +25,7 @@ char	**create_args(t_ast *root, t_cmd *cmd)
 	t_ast	*tmp;
 	char	**arr;
 	int		i;
+	// int		j;
 
 	arr = calloc(cmd->num_cmds + 1, sizeof(char *));
 	if (!arr)
@@ -38,6 +39,11 @@ char	**create_args(t_ast *root, t_cmd *cmd)
 		i++;
 	}
 	arr[i] = NULL;
+	// while (j < i) 
+	// {
+    //     free(arr[j]);
+	// 	j++;
+    // }
 	return (arr);
 }
 
