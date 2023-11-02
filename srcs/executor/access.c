@@ -35,7 +35,9 @@ char	*search_path(char *cmd, char *env_path)
 	free_split(env);
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd(": Command not found\n", STDERR_FILENO);
-	exit(127);
+	free_tokens_ast();
+	fptp();
+	free_builtins();
 	return (NULL);
 }
 
@@ -95,6 +97,11 @@ int	execute(t_cmd *cmd)
 			exit(127);
 		}
 		full_path = search_path(cmd->cmds[0], env_path);
+		if (full_path == NULL)
+		{
+			free_commands(cmd);
+			exit(127);
+		}
 	}
 	execve(full_path, cmd->cmds, get()->env);
 	perror(full_path);

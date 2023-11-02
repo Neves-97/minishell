@@ -1,5 +1,14 @@
 #include "../../includes/minishell.h"
 
+void free_io(t_io *io) 
+{
+    // Free any resources held by io->redirection if needed.
+    // If there are additional dynamically allocated fields, free them here.
+
+    free(io);
+}
+
+
 void	setup_pipe_bools(t_io *io)
 {
 	if (!io)
@@ -50,6 +59,7 @@ void	execute_pipe(t_ast *root)
 	}
 	tmp[READ] = pipe_fd[READ];
 	handle_command(root, setup_io(LAST_CMD, pipe_fd, tmp[READ]));
+	// free();
 	close(tmp[READ]);
 	close(tmp[WRITE]);
 }

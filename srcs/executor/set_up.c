@@ -28,7 +28,12 @@ char	**create_args(t_ast *root, t_cmd *cmd)
 
 	arr = ft_calloc(cmd->num_cmds + 1, sizeof(char *));
 	if (!arr)
-		return (NULL);
+	{
+		// free_tokens_ast();
+		// fptp();
+		// free_builtins();
+		return NULL;
+	}
 	tmp = root;
 	i = 0;
 	while (tmp)
@@ -53,6 +58,7 @@ void	setup_cmd(t_ast *root, t_io *io, t_cmd *cmd)
 		return ;
 	}
 	cmd->cmds = create_args(root, cmd);
+	// free(cmd->cmds);
 }
 
 // void setup_cmd(t_ast *root, t_io *io, t_cmd *cmd)
