@@ -25,7 +25,6 @@ char	**create_args(t_ast *root, t_cmd *cmd)
 	t_ast	*tmp;
 	char	**arr;
 	int		i;
-	// int		j;
 
 	arr = ft_calloc(cmd->num_cmds + 1, sizeof(char *));
 	if (!arr)

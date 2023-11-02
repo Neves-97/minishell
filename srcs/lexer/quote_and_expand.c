@@ -52,6 +52,13 @@ char	*expand(char *cont, char *ns, int *i, int *j)
 	return (ns);
 }
 
+int	is_any_quote(char c)
+{
+	if (c == '\'' || c == '\"')
+		return (1);
+	return (0);
+}
+
 char	*handle_quotes(char *content)
 {
 	char	q;
@@ -89,9 +96,13 @@ void	quote_and_expand(t_list *tokens)
 	tmp = tokens;
 	while (tokens)
 	{
-		old_str = tokens->content;
-		tokens->content = handle_quotes(tokens->content);
-		free (old_str);
+		if (!(is_any_quote(tokens->content[0]) && \
+		is_any_quote(tokens->content[1])))
+		{
+			old_str = tokens->content;
+			tokens->content = handle_quotes(tokens->content);
+			free (old_str);
+		}
 		tokens = tokens->next;
 	}
 	tokens = tmp;

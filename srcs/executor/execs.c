@@ -8,6 +8,7 @@ static int	exec_builtin(t_cmd *cmd, t_built *builtin)
 		fptp();
 		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
 	}
+	free(cmd->io);
 	get()->exit_status = builtin->f(cmd->cmds);
 	dup2(get()->fd[READ], STDIN_FILENO);
 	dup2(get()->fd[WRITE], STDOUT_FILENO);

@@ -205,13 +205,7 @@ char	*ft_strndup(const char *s, int n);
 
 // expand.c
 void	quote_and_expand(t_list *tokens);
-
-// quotes.c
-char	*strip_quotes(char *content, char *q);
-int		check_quote_state(char *arg);
-
-// inc_split.c
-char	**inc_split(char const *s, char c);
+int		is_any_quote(char c);
 
 // parser.c
 void	parser(void);

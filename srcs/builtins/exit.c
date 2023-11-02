@@ -54,6 +54,7 @@ int	ft_exit(char **cmds)
 	free_nodes();
 	free_builtins();
 	free_ast(get()->ast_tmp);
+	free(cmds);
 	exit(get()->exit_status);
 	return (0);
 }

@@ -42,6 +42,13 @@ void	create_token(t_msh *data, int start, int i)
 		free (str);
 }
 
+void	quotes_exception(t_list **head, t_list **tmp)
+{
+	(*head)->content[0] = '\0';
+	(*head) = (*tmp);
+	return ;
+}
+
 void	delete_empty_tokens(t_list **head)
 {
 	t_list	*tmp;
@@ -57,6 +64,9 @@ void	delete_empty_tokens(t_list **head)
 	}
 	while ((*head))
 	{
+		if (is_any_quote((*head)->content[0]) && \
+		is_any_quote((*head)->content[1]))
+			return (quotes_exception(head, &tmp));
 		while ((*head)->next && !(*head)->next->content[0])
 		{
 			swap = (*head)->next;
