@@ -28,7 +28,12 @@ char	**create_args(t_ast *root, t_cmd *cmd)
 
 	arr = ft_calloc(cmd->num_cmds + 1, sizeof(char *));
 	if (!arr)
-		return (NULL);
+	{
+		// free_tokens_ast();
+		// fptp();
+		// free_builtins();
+		return NULL;
+	}
 	tmp = root;
 	i = 0;
 	while (tmp)
@@ -41,6 +46,7 @@ char	**create_args(t_ast *root, t_cmd *cmd)
 	return (arr);
 }
 
+
 void	setup_cmd(t_ast *root, t_io *io, t_cmd *cmd)
 {
 	cmd->io = io;
@@ -52,7 +58,34 @@ void	setup_cmd(t_ast *root, t_io *io, t_cmd *cmd)
 		return ;
 	}
 	cmd->cmds = create_args(root, cmd);
+	// free(cmd->cmds);
 }
+
+// void setup_cmd(t_ast *root, t_io *io, t_cmd *cmd)
+// {
+// 	cmd->io = io;
+//     cmd->io->redirection = root->left;
+//     if (!root || !io || !cmd)
+//         return ;
+//     if (cmd->cmds)
+// 	{
+//         free(cmd->cmds);
+//         cmd->cmds = NULL;
+//     }
+//     cmd->num_cmds = count_cmds(root);
+//     if (!root->content)
+//     {
+//         cmd->cmds = NULL;
+//         return;
+//     }
+//     cmd->cmds = create_args(root, cmd);
+//     if (!cmd->cmds)
+//     {
+//         free_cmd(cmd);
+//         return;
+//     }
+// }
+
 
 void	setup_pipe_redir(t_cmd *cmd, t_bool is_parent)
 {

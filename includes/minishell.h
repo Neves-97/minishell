@@ -270,7 +270,7 @@ int		count_cmds(t_ast *root);
 
 // BUILTINS/execs.c
 
-void	execute_job(t_ast *root);
+void	execuexecute_jobte_job(t_ast *root);
 void	exec_ast(t_ast *root);
 void	exec_cmd(t_cmd *cmd);
 
@@ -382,6 +382,6 @@ void	free_tokens_ast();
 void	fptp();
 
 
-void free_cmd(t_cmd *cmd);
+void	free_commands(t_cmd *cmd);
 
 #endif
