@@ -23,6 +23,7 @@ static int	exec_pipe_builtin(t_cmd *cmd, t_built *builtin)
 	exit_code = builtin->f(cmd->cmds);
 	dup2(get()->fd[READ], STDIN_FILENO);
 	dup2(get()->fd[WRITE], STDOUT_FILENO);
+	free_commands(cmd);
 	exit(exit_code);
 }
 

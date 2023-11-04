@@ -36,7 +36,12 @@ void	add_builtin(t_built **list, char *cmd, int (*f)(char **))
 
 	new = (t_built *)malloc(sizeof(t_built));
 	if (!new)
+	{
+		// free_tokens_ast();
+		// fptp();
+		// free(new);
 		exit(EXIT_FAILURE);
+	}
 	new->cmd = cmd;
 	new->f = f;
 	new->next = NULL;

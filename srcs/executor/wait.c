@@ -8,6 +8,7 @@ void	wait_exec(void)
 	while (1)
 	{
 		pid = waitpid(-1, &wstatus, 0);
+		signal(2, sig_handler);
 		if (pid <= 0)
 			return ;
 		if (pid == get()->final_pid)
@@ -18,6 +19,8 @@ void	wait_exec(void)
 			{
 				get()->exit_status = WTERMSIG(wstatus) + 128;
 				//TODO: FIX ERROR MSG.
+				// free_tokens_ast();
+				// fptp();
 				exit(EXIT_FAILURE);
 			}
 		}

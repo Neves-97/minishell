@@ -16,8 +16,12 @@ int	main(int ac, char **av, char **envp)
 	setup(get(), envp);
 	(void)ac;
 	(void)av;
+
+	// signal(SIGINT, sig_handler);
 	while (1)
 	{
+		get()->child = FALSE;
+		parent_signals();
 		get()->input = readline("minishell:~$ ");
 		if (!get()->input)
 			break ;

@@ -9,3 +9,10 @@ void	fptp()
 {
 	free_ptp(get()->env);
 }
+
+void	free_them_all()
+{
+	free_tokens_ast();
+	fptp();
+	free_builtins();
+}
