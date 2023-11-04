@@ -375,16 +375,16 @@ void	sig_handler(int signum);
 
 void	exec_cmd_line(t_ast *root);
 
-int	execute_ast(t_ast *root);
-int	execute_hd(t_ast *root);
+int		execute_ast(t_ast *root);
+int		execute_hd(t_ast *root);
 void	execute_commands(t_ast *root);
 
 // free.c
 
-void	free_tokens_ast();
-
+void	free_tokens_ast(void);
 
 void	free_commands(t_cmd *cmd);
+void	free_them_all(void);
 
 // int	execute_hd(t_ast *root);
 // int	hd_cmd_line(t_ast *root);

@@ -59,7 +59,6 @@ void	execute_pipe(t_ast *root)
 	}
 	tmp[READ] = pipe_fd[READ];
 	handle_command(root, setup_io(LAST_CMD, pipe_fd, tmp[READ]));
-	// free();
 	close(tmp[READ]);
 	close(tmp[WRITE]);
 }

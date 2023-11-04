@@ -35,6 +35,8 @@ int	hd_input(char *eof, int fd)
 	pid = fork();
 	if (pid == -1)
 	{
+		// free_tokens_ast();
+		// free_ptp(get()->env);
 		exit(EXIT_FAILURE);
 	}
 	if (pid == 0)
@@ -70,6 +72,8 @@ int	handle_hd(t_ast *redir)
 	}
 	free(redir->content);
 	redir->content = ft_strdup(".heredoc");
+	// free_tokens_ast();
+	// free_ptp(get()->env);
 	close(fd);
 	return (1);
 }

@@ -5,6 +5,7 @@ void	setup(t_msh *data, char **envp)
 	data->env = dup_ptp(envp);
 	inc_shlvl(data->env);
 	data->builtins = init_builtins();
+	// free_ptp(data->env);
 }
 
 void	inc_shlvl(char **env)

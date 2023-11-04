@@ -51,12 +51,16 @@ int	heredoc_redir(t_ast *node, int *fd)
 	if (*fd == -1)
 	{
 		// TODO: // handle error
+		free_tokens_ast();
+		free_ptp(get()->env);
 		perror("Error opening file");
 		exit(EXIT_FAILURE);
 	}
 	if (unlink(node->content) == -1)
 	{
 		// TODO: // handle error
+		free_tokens_ast();
+		free_ptp(get()->env);
 		perror("Error unlink");
 		exit(EXIT_FAILURE);
 	}
