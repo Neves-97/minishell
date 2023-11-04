@@ -30,7 +30,7 @@ char	**create_args(t_ast *root, t_cmd *cmd)
 	if (!arr)
 	{
 		// free_tokens_ast();
-		// fptp();
+		// free_nodes();
 		// free_builtins();
 		return NULL;
 	}
@@ -81,7 +81,7 @@ void	setup_cmd(t_ast *root, t_io *io, t_cmd *cmd)
 //     cmd->cmds = create_args(root, cmd);
 //     if (!cmd->cmds)
 //     {
-//         free_cmd(cmd);
+//         free (cmd);
 //         return;
 //     }
 // }

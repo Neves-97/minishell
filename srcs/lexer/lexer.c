@@ -49,6 +49,12 @@ void	quotes_exception(t_list **head, t_list **tmp)
 	return ;
 }
 
+void	free_token(t_list *swap)
+{
+	free(swap->content);
+	free(swap);
+}
+
 void	delete_empty_tokens(t_list **head)
 {
 	t_list	*tmp;
@@ -59,7 +65,7 @@ void	delete_empty_tokens(t_list **head)
 	{
 		swap = (*head);
 		(*head) = (*head)->next;
-		free (swap);
+		free_token(swap);
 		tmp = (*head);
 	}
 	while ((*head))
@@ -71,7 +77,7 @@ void	delete_empty_tokens(t_list **head)
 		{
 			swap = (*head)->next;
 			(*head)->next = (*head)->next->next;
-			free (swap);
+			free_token(swap);
 		}
 		(*head) = (*head)->next;
 	}

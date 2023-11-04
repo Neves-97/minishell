@@ -36,8 +36,9 @@ char	*search_path(char *cmd, char *env_path)
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd(": Command not found\n", STDERR_FILENO);
 	free_tokens_ast();
-	fptp();
+	free_nodes();
 	free_builtins();
+	free_ptp(get()->env);
 	return (NULL);
 }
 

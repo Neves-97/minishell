@@ -203,8 +203,11 @@ void	free_nodes(void);
 void	add_separator(t_msh *data, char sep);
 char	*ft_strndup(const char *s, int n);
 
-// expand.c
+// quote_and_expand.c
 void	quote_and_expand(t_list *tokens);
+int		is_any_quote(char c);
+
+// quote_and_expand_utils.c
 int		is_any_quote(char c);
 
 // parser.c
@@ -270,7 +273,7 @@ int		count_cmds(t_ast *root);
 
 // BUILTINS/execs.c
 
-void	execuexecute_jobte_job(t_ast *root);
+void	execute_job(t_ast *root);
 void	exec_ast(t_ast *root);
 void	exec_cmd(t_cmd *cmd);
 
@@ -379,9 +382,10 @@ void	execute_commands(t_ast *root);
 // free.c
 
 void	free_tokens_ast();
-void	fptp();
 
 
 void	free_commands(t_cmd *cmd);
 
+// int	execute_hd(t_ast *root);
+// int	hd_cmd_line(t_ast *root);
 #endif

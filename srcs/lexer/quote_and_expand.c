@@ -52,11 +52,23 @@ char	*expand(char *cont, char *ns, int *i, int *j)
 	return (ns);
 }
 
-int	is_any_quote(char c)
+char	*before_expand(char *cont, char *ns, int *i, int *j)
 {
-	if (c == '\'' || c == '\"')
-		return (1);
-	return (0);
+	char	**split;
+	int		y;
+
+	y = -1;
+	ns = expand(cont, ns, i, j);
+	split = ft_split(ns, 32);
+	if (split[0] && !split[1])
+	{
+		free_ptp(split);
+		return (ns);
+	}
+	while (split[++y])
+		ft_lstadd_back(&get()->tokens, ft_lstnew(split[y], 0));
+	free(split);
+	return (ns);
 }
 
 char	*handle_quotes(char *content)
@@ -83,7 +95,7 @@ char	*handle_quotes(char *content)
 		(!ft_isalnum(content[i + 1]) && content[i + 1] != '?'))
 			new_str[j++] = content[i++];
 		if (content[i] == '$' && q != '\'')
-			new_str = expand(content, new_str, &i, &j);
+			new_str = before_expand(content, new_str, &i, &j);
 	}
 	return (new_str);
 }
@@ -92,6 +104,7 @@ void	quote_and_expand(t_list *tokens)
 {
 	t_list	*tmp;
 	char	*old_str;
+	int		lst_size;
 
 	tmp = tokens;
 	while (tokens)
@@ -100,10 +113,23 @@ void	quote_and_expand(t_list *tokens)
 		is_any_quote(tokens->content[1])))
 		{
 			old_str = tokens->content;
+			lst_size = ft_lstsize(tokens);
 			tokens->content = handle_quotes(tokens->content);
+			if (lst_size != ft_lstsize(tokens))
+				tokens->content[0] = '\0';
 			free (old_str);
 		}
 		tokens = tokens->next;
 	}
 	tokens = tmp;
 }
+
+// tmp = get()->tokens;
+// while (get()->tokens)
+// {
+// 	printf("ns: %s, token: %s\n", ns, get()->tokens->content);
+// 	if (!ft_strncmp(ns, get()->tokens->content, ft_strlen(ns)))
+// 		free_single_token(&get()->tokens);
+// 	get()->tokens = get()->tokens->next;
+// }
+// get()->tokens = tmp;

@@ -18,7 +18,7 @@ int	hd_job(t_ast *root)
 	return (1);
 }
 
-/* Execute the <and or> syntax block */
+// /* Execute the <and or> syntax block */
 int	hd_and_or(t_ast *root)
 {
 	if (!root)
@@ -38,7 +38,7 @@ int	hd_and_or(t_ast *root)
 	return (1);
 }
 
-/* Execute the <cmd_line> syntax block */
+// /* Execute the <cmd_line> syntax block */
 int	hd_cmd_line(t_ast *root)
 {
 	if (!root)
