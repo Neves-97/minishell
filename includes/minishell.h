@@ -322,12 +322,12 @@ int		executor(void);
 // test
 
 t_built	*init_builtins(void);
-void add_builtin(t_built **list, char *cmd, int (*f)(char **));
+void	add_builtin(t_built **list, char *cmd, int (*f)(char **));
 
 
 t_list	*ft_listilia(char *value);
 void	free_paths(char *new_path, char *cwd);
-int	incorrect_args(char **path);
+int		incorrect_args(char **path);
 
 char	*get_home_dir(void);
 char	*get_tilda_path(char *path);
@@ -335,8 +335,8 @@ char	*process_path(char *path);
 void	update_pwd(void);
 void	update_oldpwd(char *old);
 
-int	ft_exit(char **cmds);
-int	validate_code(char **cmds, int i);
+int		ft_exit(char **cmds);
+int		validate_code(char **cmds, int i);
 void	ft_lstclear1(t_list **lst, void (*del)(void *));
 void	ft_lstdelone1(t_list *lst, void (*del)(void *));
 
@@ -344,23 +344,23 @@ void	ft_lstdelone1(t_list *lst, void (*del)(void *));
 
 char	*sub_tild_dir(char *relative);
 char	*search_path(char *cmd, char *env_path);
-int	is_directory(char *cmd);
-int	check_error(char *path);
-int	execute(t_cmd *cmd);
+int		is_directory(char *cmd);
+int		check_error(char *path);
+int		execute(t_cmd *cmd);
 char	*get_env_value(char *value);
 char	**get_argv_env(void);
 void	free_split(char **split);
-void print_env(char **env);
+void	print_env(char **env);
 
 
 // heredoc
 
-int	hd_command(t_ast *root);
-int	hd_pipe(t_ast *root);
-int	hd_job(t_ast *root);
-int	hd_and_or(t_ast *root);
-int	hd_cmd_line(t_ast *root);
-int	execute_hd(t_ast *root);
+int		hd_command(t_ast *root);
+int		hd_pipe(t_ast *root);
+int		hd_job(t_ast *root);
+int		hd_and_or(t_ast *root);
+int		hd_cmd_line(t_ast *root);
+int		execute_hd(t_ast *root);
 
 
 void	exec_and_or(t_ast *root);
