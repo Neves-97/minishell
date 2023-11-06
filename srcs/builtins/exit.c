@@ -13,8 +13,8 @@ int	validate_code(char **cmds, int i)
 	{
 		if (!ft_isdigit(cmds[1][i++]))
 		{
-			// if (!get()->child)
-			// 	ft_putstr_fd("exit\n", STDOUT_FILENO);
+			if (!get()->child)
+				ft_putstr_fd("exit\n", STDOUT_FILENO);
 			ft_putstr_fd("bash: exit: ", STDERR_FILENO);
 			ft_putstr_fd(cmds[1], STDERR_FILENO);
 			ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);

@@ -3,6 +3,7 @@
 void	minishell(t_msh *data)
 {
 	lexer(data);
+	// printf("AFTER LEXER\n\n");
 	// print_list(data->tokens);
 	parser();
 	// print_ast(get()->ast_tmp, 0);
@@ -17,6 +18,7 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 
+	// signal(SIGINT, sig_handler);
 	while (1)
 	{
 		get()->child = FALSE;

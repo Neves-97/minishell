@@ -18,11 +18,11 @@ void	wait_exec(void)
 			else if (WIFSIGNALED(wstatus))
 			{
 				get()->exit_status = WTERMSIG(wstatus) + 128;
-				// //TODO: FIX ERROR MSG.
-				// // free_tokens_ast();
-				// // free_ptp(get()->env);
-				// exit(EXIT_FAILURE);
-				display_err_msg(wstatus);
+				//TODO: FIX ERROR MSG.
+				// free_tokens_ast();
+				// free_ptp(get()->env);
+				free_them_all();
+				exit(EXIT_FAILURE);
 			}
 		}
 	}

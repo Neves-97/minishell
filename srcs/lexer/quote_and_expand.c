@@ -44,7 +44,7 @@ char	*expand(char *cont, char *ns, int *i, int *j)
 	{
 		free (ns);
 		free (exp);
-		ns = calloc(ft_strlen(n2) + ft_strlen(cont + i[0]) + 1, sizeof(char));
+		ns = ft_calloc(ft_strlen(n2) + ft_strlen(cont + i[0]) + 1, sizeof(char));
 		ft_memcpy(ns, n2, ft_strlen(n2));
 		free (n2);
 		j[0] = ft_strlen(ns);
@@ -81,7 +81,7 @@ char	*handle_quotes(char *content)
 	q = 0;
 	i = 0;
 	j = 0;
-	new_str = calloc(ft_strlen(content) + 1, sizeof(char));
+	new_str = ft_calloc(ft_strlen(content) + 1, sizeof(char));
 	while (content[i])
 	{
 		if ((content[i] == '\"' || content[i] == '\'') && q == 0)
@@ -92,7 +92,7 @@ char	*handle_quotes(char *content)
 			i++;
 		}
 		else if (content[i] != '$' || (content[i] == '$' && q == '\'') || \
-		(!ft_isalnum(content[i + 1]) && content[i + 1] != '?'))
+		(!ft_isalnum(content[i + 1]) && !is_any_quote(content[i + 1]) && content[i + 1] != '?'))
 			new_str[j++] = content[i++];
 		if (content[i] == '$' && q != '\'')
 			new_str = before_expand(content, new_str, &i, &j);
@@ -109,8 +109,8 @@ void	quote_and_expand(t_list *tokens)
 	tmp = tokens;
 	while (tokens)
 	{
-		if (!(is_any_quote(tokens->content[0]) && \
-		is_any_quote(tokens->content[1])))
+		if (!(is_any_quote(tokens->content[0]) && 
+		is_any_quote(tokens->content[1])) || tokens->content[2])
 		{
 			old_str = tokens->content;
 			lst_size = ft_lstsize(tokens);

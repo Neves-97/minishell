@@ -374,7 +374,19 @@ void	wait_exec(void);
 
 int		ft_exit(char **cmds);
 int		validate_code(char **cmds, int i);
+void	ft_lstclear1(t_list **lst, void (*del)(void *));
+void	ft_lstdelone1(t_list *lst, void (*del)(void *));
 
+
+
+char	*sub_tild_dir(char *relative);
+char	*search_path(char *cmd, char *env_path);
+int		is_directory(char *cmd);
+int		check_error(char *path, t_cmd *cmd);
+int		execute(t_cmd *cmd);
+char	*get_env_value(char *value);
+char	**get_argv_env(void);
+void	free_split(char **split);
 void	print_env(char **env);
 
 #endif

@@ -13,6 +13,7 @@ void	here_run(char *eof, int fd)
 			{
 				close(fd);
 				free(input);
+				free_them_all();
 				exit(EXIT_SUCCESS);
 			}
 		}
@@ -38,6 +39,8 @@ int	hd_input(char *eof, int fd)
 
 	pid = fork();
 	if (pid == -1)
+	{
+		free_them_all();
 		exit(EXIT_FAILURE);
 	if (pid == 0)
 	{
