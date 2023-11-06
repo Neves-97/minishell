@@ -7,8 +7,7 @@ int	out_tr_redir(t_ast *node, int *out_fd)
 	*out_fd = open(node->content, O_CREAT | O_TRUNC | O_WRONLY, 0664);
 	if (*out_fd == -1)
 	{
-		free_tokens_ast();
-		free_nodes();
+		free_them_all();
 		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
 	}
 	return (0);
@@ -21,8 +20,7 @@ int	out_ap_redir(t_ast *node, int *out_fd)
 	*out_fd = open(node->content, O_CREAT | O_APPEND | O_WRONLY, 0664);
 	if (*out_fd == -1)
 	{
-		free_tokens_ast();
-		free_nodes();
+		free_them_all();
 		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
 	}
 	return (0);

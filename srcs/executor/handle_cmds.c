@@ -23,7 +23,6 @@ void	free_commands(t_cmd *cmd)
 	}
 }
 
-
 void	handle_command(t_ast *root, t_io *io)
 {
 	t_cmd	cmd;

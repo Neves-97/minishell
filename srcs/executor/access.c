@@ -35,13 +35,13 @@ char	*search_path(char *cmd, char *env_path)
 	free_split(env);
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd(": Command not found\n", STDERR_FILENO);
-	free_them_all();
+	// free_them_all();
 	return (NULL);
 }
 
 int	is_directory(char *cmd)
 {
-	struct stat	s;
+	static struct stat	s;
 
 	if (lstat(cmd, &s) && \
 		ft_strncmp("./", cmd, 2 && cmd[0] != '/'))
@@ -56,16 +56,44 @@ int	is_directory(char *cmd)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(cmd, 2);
 		ft_putendl_fd(": Is a directory", 2);
+		free_them_all();
 		exit(126);
 	}
 	return (0);
 }
 
-int	check_error(char *path)
+int	is_directory2(char *cmd, t_cmd *cmds)
+{
+	static struct stat	s;
+
+	if (lstat(cmd, &s) && \
+		ft_strncmp("./", cmd, 2 && cmd[0] != '/'))
+	{
+		ft_putstr_fd(cmd, 2);
+		ft_putendl_fd(": command not found", 2);
+		exit(127);
+	}
+	if (S_ISDIR(s.st_mode) && (cmd[0] == '/' || \
+		!ft_strncmp("./", cmd, 2)) && !access(cmd, F_OK))
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(cmd, 2);
+		ft_putendl_fd(": Is a directory", 2);
+		free_them_all();
+		free_commands(cmds);
+		exit(126);
+	}
+	return (0);
+}
+
+int	check_error(char *path, t_cmd *cmd)
 {
 	if (access(path, X_OK))
 	{
 		get()->exit_status = 126;
+		free_them_all();
+		free (path);
+		free_commands(cmd);
 		return (126);
 	}
 	return (EXIT_FAILURE);
@@ -80,7 +108,7 @@ int	execute(t_cmd *cmd)
 	if (cmd->cmds[0][0] == '/' || !ft_strncmp(cmd->cmds[0], "./", 2)
 		|| !ft_strncmp(cmd->cmds[0], "../", 3))
 	{
-		if (!is_directory(cmd->cmds[0]))
+		if (!is_directory2(cmd->cmds[0], cmd))
 			full_path = ft_strdup(cmd->cmds[0]);
 	}
 	else if (!ft_strncmp(cmd->cmds[0], "~/", 2))
@@ -92,16 +120,19 @@ int	execute(t_cmd *cmd)
 		{
 			ft_putstr_fd(cmd->cmds[0], STDERR_FILENO);
 			ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+			free_them_all();
+			free_commands(cmd);
 			exit(127);
 		}
 		full_path = search_path(cmd->cmds[0], env_path);
 		if (full_path == NULL)
 		{
-			free_commands(cmd);
+			free_commands(cmd);\
+			free_them_all();
 			exit(127);
 		}
 	}
 	execve(full_path, cmd->cmds, get()->env);
 	perror(full_path);
-	exit (check_error(full_path));
+	exit (check_error(full_path, cmd));
 }

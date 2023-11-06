@@ -1,6 +1,6 @@
 NAME		=		minishell
 
-$(VERBOSE).SILENT:
+# $(VERBOSE).SILENT:
 
 CC			=		cc
 
@@ -26,7 +26,7 @@ SRC 		=		srcs/*.c srcs/executor/*.c srcs/lexer/*.c srcs/parser/*.c ./libft/ft_pr
 
 all:		$(NAME)
 
-$(NAME):	$(LIBFT) $(SRC) $(FT_PRINTF)
+$(NAME):	$(LIBFT) $(SRC)
 			$(CC) $(CFLAGS) $(SRC) $(GNL) $(LIBFT) $(INCLUDES) -lreadline -o $(NAME)
 		
 $(LIBFT):

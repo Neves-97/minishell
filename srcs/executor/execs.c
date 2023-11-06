@@ -4,8 +4,8 @@ static int	exec_builtin(t_cmd *cmd, t_built *builtin)
 {
 	if (setup_redir(cmd, TRUE))
 	{
-		free_tokens_ast();
-		free_nodes();
+		free_them_all();
+		free_commands(cmd);
 		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
 	}
 	// free(cmd->io);
@@ -20,11 +20,16 @@ static int	exec_pipe_builtin(t_cmd *cmd, t_built *builtin)
 	int	exit_code;
 
 	if (setup_redir(cmd, TRUE))
+	{
+		free_them_all();
+		free_commands(cmd);
 		exit(EXIT_FAILURE);
+	}
 	exit_code = builtin->f(cmd->cmds);
 	dup2(get()->fd[READ], STDIN_FILENO);
 	dup2(get()->fd[WRITE], STDOUT_FILENO);
 	free_commands(cmd);
+	free_them_all();
 	exit(exit_code);
 }
 
@@ -49,8 +54,8 @@ static int	handle_normal_cmd(t_cmd *cmd, t_built *builtin)
 	pid = fork();
 	if (pid == -1)
 	{
-		free_tokens_ast();
-		free_nodes();
+		free_them_all();
+		free_commands(cmd);
 		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
 	}
 	if (pid == 0)
@@ -64,6 +69,8 @@ static int	handle_normal_cmd(t_cmd *cmd, t_built *builtin)
 		}
 		if (setup_redir(cmd, FALSE))
 		{
+			free_them_all();
+			free_commands(cmd);
 			exit(EXIT_FAILURE);
 		}
 		execute(cmd);
@@ -84,8 +91,8 @@ void	exec_cmd(t_cmd *cmd)
 
 	if (!cmd->cmds[0])
 	{
-		free_tokens_ast();
-		free_nodes();
+		free_them_all();
+		free_commands(cmd);
 		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
 	}
 	builtin = is_builtin_cmd(cmd->cmds[0]);

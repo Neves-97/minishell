@@ -31,6 +31,13 @@ void	replace_pwd(void)
 	free(new_pwd);
 }
 
+int	cd_err(char *dir)
+{
+	free (dir);
+	write(2, "cd: No such file or directory\n", 30);
+	return (1);
+}
+
 int	ft_cd(char	**arg)
 {
 	char	*dir;
@@ -38,10 +45,10 @@ int	ft_cd(char	**arg)
 	int		i;
 
 	dir_tmp = NULL;
-	if (arg[2])
+	if (arg[0] && arg[1] && arg[2])
 		return (1);
 	i = search_env("HOME");
-	if (!arg[1] || !arg[1][0])
+	if (!arg[1])
 		dir = ft_strdup(get()->env[i] + 5);
 	else if (arg[1][0] == '/')
 		dir = ft_strdup(arg[1]);
@@ -54,7 +61,7 @@ int	ft_cd(char	**arg)
 		free (dir_tmp);
 	}
 	if (chdir(dir) == -1)
-		write(2, "cd: No such file or directory\n", 30);
+		return (cd_err(dir));
 	replace_pwd();
 	free (dir);
 	return (0);

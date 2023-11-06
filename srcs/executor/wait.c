@@ -21,6 +21,7 @@ void	wait_exec(void)
 				//TODO: FIX ERROR MSG.
 				// free_tokens_ast();
 				// free_ptp(get()->env);
+				free_them_all();
 				exit(EXIT_FAILURE);
 			}
 		}

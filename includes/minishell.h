@@ -345,7 +345,7 @@ void	ft_lstdelone1(t_list *lst, void (*del)(void *));
 char	*sub_tild_dir(char *relative);
 char	*search_path(char *cmd, char *env_path);
 int		is_directory(char *cmd);
-int		check_error(char *path);
+int		check_error(char *path, t_cmd *cmd);
 int		execute(t_cmd *cmd);
 char	*get_env_value(char *value);
 char	**get_argv_env(void);
