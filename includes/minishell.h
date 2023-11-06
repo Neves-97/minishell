@@ -267,125 +267,114 @@ void	ft_unset_arg(char *arg);
 // int		ft_exit(void);
 int		search_env(char *var);
 
-// BUILTINS/create_ast
-// int		main(int argc, char **argv, char **envp);
+// access
+
+char	*sub_tild_dir(char *relative);
+char	*search_path(char *cmd, char *env_path);
+int		is_directory(char *cmd);
+int		check_error(char *path);
+
+// and_or 
+
+void	exec_and_or(t_ast *root);
+void	execute_helper(char *full_path, t_cmd *cmd);
+void	execute(t_cmd *cmd);
+
+// create_ast
+
 int		count_cmds(t_ast *root);
+t_built	*init_builtins(void);
+void	add_builtin(t_built **list, char *cmd, int (*f)(char **));
+int		executor(void);
+
+// error_codes
+
+char	*get_err_msg3(int err_code);
+char	*get_err_msg2(int err_code);
+char	*get_err_msg(int err_code);
+void	display_err_msg(int wstatus);
 
 // BUILTINS/execs.c
 
-void	execute_job(t_ast *root);
-void	exec_ast(t_ast *root);
+t_built	*is_builtin_cmd(char *cmd);
 void	exec_cmd(t_cmd *cmd);
 
-// BUILTINS/handle_cmds.c
+// free
 
-//void	handle_normal_cmd(t_cmd *cmd, t_built *builtin);
+void	free_tokens_ast(void);
+void	free_them_all(void);
+
+// get_args
+
+void	free_split(char **split);
+char	*get_env_value(char *value);
+char	**get_argv_env(void);
+
+// handle_cmds.c
+
+void	free_commands(t_cmd *cmd);
 void	handle_command(t_ast *root, t_io *io);
 
-// BUILTINS/redirs_1.c
+// heredoc1
+void	here_run(char *eof, int fd);
+int		hd_input(char *eof, int fd);
+int		handle_hd(t_ast *redir);
+int		hd_command(t_ast *root);
+int		hd_pipe(t_ast *root);
+
+// heredoc2
+
+int		hd_job(t_ast *root);
+int		hd_and_or(t_ast *root);
+int		hd_cmd_line(t_ast *root);
+int		execute_hd(t_ast *root);
+
+// job
+
+void	execute_job(t_ast *root);
+
+// pipes
+
+void	setup_pipe_bools(t_io *io);
+void	execute_pipe(t_ast *root);
+
+// redirs_1.c
 
 int		out_tr_redir(t_ast *node, int *out_fd);
 int		out_ap_redir(t_ast *node, int *out_fd);
 int		in_redir(t_ast *node, int *in_fd);
 int		heredoc_redir(t_ast *node, int *fd);
 
-// BUILTINS/redirs_setup.c
+// redirs_setup.c
 
 int		setup_redir_cases(t_ast *node, int *in_fd, int *out_fd);
 int		setup_file_redir(t_cmd *cmd, t_bool is_parent);
 
-// BUILTINS/set_up.c
+// set_up.c
 
-void	setup_pipe_bools(t_io *io);
 t_io	*setup_io(int io_type, int pipe_fd[2], int read_fd);
 char	**create_args(t_ast *root, t_cmd *cmd);
 void	setup_cmd(t_ast *root, t_io *io, t_cmd *cmd);
+void	setup_pipe_redir(t_cmd *cmd, t_bool is_parent);
 int		setup_redir(t_cmd *cmd, t_bool is_parent);
 
-// BUILTINS/pipes.c
-
-void	setup_pipe_bools(t_io *io);
-void	execute_pipe(t_ast *root);
-
-// SIGNALS/signal_handle.c
+// signals
 
 void	sig_handler(int signum);
 void	child_signals(void);
 void	ignore_signals(void);
 void	parent_signals(void);
+void	heredoc_signals(void);
 
-// BUILTINS/wait.c
+// wait.c
 
 void	wait_exec(void);
-int		executor(void);
 
-// test
-
-t_built	*init_builtins(void);
-void	add_builtin(t_built **list, char *cmd, int (*f)(char **));
-
-
-t_list	*ft_listilia(char *value);
-void	free_paths(char *new_path, char *cwd);
-int		incorrect_args(char **path);
-
-char	*get_home_dir(void);
-char	*get_tilda_path(char *path);
-char	*process_path(char *path);
-void	update_pwd(void);
-void	update_oldpwd(char *old);
+// builtins exit
 
 int		ft_exit(char **cmds);
 int		validate_code(char **cmds, int i);
-void	ft_lstclear1(t_list **lst, void (*del)(void *));
-void	ft_lstdelone1(t_list *lst, void (*del)(void *));
 
-
-
-char	*sub_tild_dir(char *relative);
-char	*search_path(char *cmd, char *env_path);
-int		is_directory(char *cmd);
-int		check_error(char *path);
-int		execute(t_cmd *cmd);
-char	*get_env_value(char *value);
-char	**get_argv_env(void);
-void	free_split(char **split);
 void	print_env(char **env);
 
-
-// heredoc
-
-int		hd_command(t_ast *root);
-int		hd_pipe(t_ast *root);
-int		hd_job(t_ast *root);
-int		hd_and_or(t_ast *root);
-int		hd_cmd_line(t_ast *root);
-int		execute_hd(t_ast *root);
-
-
-void	exec_and_or(t_ast *root);
-
-
-void	parent_signals(void);
-
-void	heredoc_signals(void);
-
-void	sig_handler(int signum);
-
-
-void	exec_cmd_line(t_ast *root);
-
-int		execute_ast(t_ast *root);
-int		execute_hd(t_ast *root);
-void	execute_commands(t_ast *root);
-
-// free.c
-
-void	free_tokens_ast(void);
-
-void	free_commands(t_cmd *cmd);
-void	free_them_all(void);
-
-// int	execute_hd(t_ast *root);
-// int	hd_cmd_line(t_ast *root);
 #endif

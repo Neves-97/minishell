@@ -6,7 +6,7 @@ static int	exec_builtin(t_cmd *cmd, t_built *builtin)
 	{
 		free_tokens_ast();
 		free_nodes();
-		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+		exit(EXIT_FAILURE); // exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
 	}
 	// free(cmd->io);
 	get()->exit_status = builtin->f(cmd->cmds);
@@ -86,7 +86,7 @@ void	exec_cmd(t_cmd *cmd)
 	{
 		free_tokens_ast();
 		free_nodes();
-		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+		exit(EXIT_FAILURE); // exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
 	}
 	builtin = is_builtin_cmd(cmd->cmds[0]);
 	if (builtin && !cmd->io->use_pipe[READ] && !cmd->io->use_pipe[WRITE])

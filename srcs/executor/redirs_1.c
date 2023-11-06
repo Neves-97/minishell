@@ -9,7 +9,7 @@ int	out_tr_redir(t_ast *node, int *out_fd)
 	{
 		free_tokens_ast();
 		free_nodes();
-		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+		exit(EXIT_FAILURE); // exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
 	}
 	return (0);
 }
@@ -23,7 +23,7 @@ int	out_ap_redir(t_ast *node, int *out_fd)
 	{
 		free_tokens_ast();
 		free_nodes();
-		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+		exit(EXIT_FAILURE); // exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
 	}
 	return (0);
 }
@@ -37,7 +37,7 @@ int	in_redir(t_ast *node, int *in_fd)
 	{
 		free_tokens_ast();
 		free_nodes();
-		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+		exit(EXIT_FAILURE); // exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
 	}
 	return (0);
 }

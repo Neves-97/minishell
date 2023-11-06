@@ -1,14 +1,5 @@
 #include "../../includes/minishell.h"
 
-void free_io(t_io *io) 
-{
-    // Free any resources held by io->redirection if needed.
-    // If there are additional dynamically allocated fields, free them here.
-
-    free(io);
-}
-
-
 void	setup_pipe_bools(t_io *io)
 {
 	if (!io)

@@ -17,7 +17,6 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 
-	// signal(SIGINT, sig_handler);
 	while (1)
 	{
 		get()->child = FALSE;

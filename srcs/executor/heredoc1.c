@@ -19,13 +19,17 @@ void	here_run(char *eof, int fd)
 		ft_putendl_fd(input, fd);
 		free(input);
 	}
-	ft_putstr_fd("minishell: warning: here-document delimited by end-of-file (wanted `", STDERR_FILENO);
+	ft_putstr_fd("minishell: warning: here-document \
+		delimited by end-of-file (wanted `", STDERR_FILENO);
 	ft_putstr_fd(eof, STDERR_FILENO);
 	ft_putstr_fd("')\n", STDERR_FILENO);
 	close(fd);
 	free(input);
 	exit(EXIT_SUCCESS);
 }
+
+// free_tokens_ast();
+// free_ptp(get()->env) on line 40;
 
 int	hd_input(char *eof, int fd)
 {
@@ -34,11 +38,7 @@ int	hd_input(char *eof, int fd)
 
 	pid = fork();
 	if (pid == -1)
-	{
-		// free_tokens_ast();
-		// free_ptp(get()->env);
 		exit(EXIT_FAILURE);
-	}
 	if (pid == 0)
 	{
 		heredoc_signals();
@@ -62,7 +62,7 @@ int	handle_hd(t_ast *redir)
 {
 	int	fd;
 
-	fd = open(".heredoc", O_RDWR | O_TRUNC | O_CREAT, 0644);
+	fd = open(".here", O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (fd == -1)
 		exit(EXIT_FAILURE);
 	if (!hd_input(redir->content, fd))
@@ -71,7 +71,7 @@ int	handle_hd(t_ast *redir)
 		return (0);
 	}
 	free(redir->content);
-	redir->content = ft_strdup(".heredoc");
+	redir->content = ft_strdup(".here");
 	// free_tokens_ast();
 	// free_ptp(get()->env);
 	close(fd);

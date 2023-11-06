@@ -3,7 +3,6 @@
 void	free_commands(t_cmd *cmd)
 {
 	// int	i;
-
 	// i = 0;
 	if (cmd->cmds)
 	{
@@ -22,7 +21,6 @@ void	free_commands(t_cmd *cmd)
 		cmd->io = NULL;
 	}
 }
-
 
 void	handle_command(t_ast *root, t_io *io)
 {
