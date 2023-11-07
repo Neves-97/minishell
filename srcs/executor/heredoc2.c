@@ -1,5 +1,23 @@
 #include "../../includes/minishell.h"
 
+int	hd_pipe(t_ast *root)
+{
+	t_ast	*job;
+
+	if (!hd_command(root->left))
+		return (0);
+	job = root->right;
+	while (job && job->type == AST_PIPE)
+	{
+		if (!hd_command(job->left))
+			return (0);
+		job = job->right;
+	}
+	if (!hd_command(job))
+		return (0);
+	return (1);
+}
+
 /* Execute the <job> syntax block */
 int	hd_job(t_ast *root)
 {

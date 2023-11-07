@@ -6,9 +6,8 @@ static int	exec_builtin(t_cmd *cmd, t_built *builtin)
 	{
 		free_them_all();
 		free_commands(cmd);
-		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+		exit(EXIT_FAILURE);
 	}
-	// free(cmd->io);
 	get()->exit_status = builtin->f(cmd->cmds);
 	dup2(get()->fd[READ], STDIN_FILENO);
 	dup2(get()->fd[WRITE], STDOUT_FILENO);
@@ -33,18 +32,19 @@ static int	exec_pipe_builtin(t_cmd *cmd, t_built *builtin)
 	exit(exit_code);
 }
 
-t_built	*is_builtin_cmd(char *cmd)
+static void	child_process(t_cmd *cmd, t_built *builtin)
 {
-	t_built	*builtin;
-
-	builtin = get()->builtins;
-	while (builtin)
+	child_signals();
+	get()->child = TRUE;
+	if (builtin)
+		exec_pipe_builtin(cmd, builtin);
+	if (setup_redir(cmd, FALSE))
 	{
-		if (!ft_strncmp(cmd, builtin->cmd, ft_strlen(builtin->cmd) + 1))
-			return (builtin);
-		builtin = builtin->next;
+		free_them_all();
+		free_commands(cmd);
+		exit(EXIT_FAILURE);
 	}
-	return (NULL);
+	execute(cmd);
 }
 
 static int	handle_normal_cmd(t_cmd *cmd, t_built *builtin)
@@ -56,31 +56,15 @@ static int	handle_normal_cmd(t_cmd *cmd, t_built *builtin)
 	{
 		free_them_all();
 		free_commands(cmd);
-		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+		exit(EXIT_FAILURE);
 	}
 	if (pid == 0)
-	{
-		// setup redirections
-		child_signals();
-		get()->child = TRUE;
-		if (builtin)
-		{
-			exec_pipe_builtin(cmd, builtin);
-		}
-		if (setup_redir(cmd, FALSE))
-		{
-			free_them_all();
-			free_commands(cmd);
-			exit(EXIT_FAILURE);
-		}
-		execute(cmd);
-	}
+		child_process(cmd, builtin);
 	else
 	{
 		ignore_signals();
 		if (!cmd->io->use_pipe[WRITE])
 			get()->final_pid = pid;
-		// If it's the last cmd, save its pid
 	}
 	return (1);
 }
@@ -93,7 +77,7 @@ void	exec_cmd(t_cmd *cmd)
 	{
 		free_them_all();
 		free_commands(cmd);
-		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+		exit(EXIT_FAILURE);
 	}
 	builtin = is_builtin_cmd(cmd->cmds[0]);
 	if (builtin && !cmd->io->use_pipe[READ] && !cmd->io->use_pipe[WRITE])
@@ -103,3 +87,39 @@ void	exec_cmd(t_cmd *cmd)
 	}
 	handle_normal_cmd(cmd, builtin);
 }
+
+// static int	handle_normal_cmd(t_cmd *cmd, t_built *builtin)
+// {
+// 	pid_t	pid;
+
+// 	pid = fork();
+// 	if (pid == -1)
+// 	{
+// 		free_them_all();
+// 		free_commands(cmd);
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	if (pid == 0)
+// 	{
+// 		child_signals();
+// 		get()->child = TRUE;
+// 		if (builtin)
+// 		{
+// 			exec_pipe_builtin(cmd, builtin);
+// 		}
+// 		if (setup_redir(cmd, FALSE))
+// 		{
+// 			free_them_all();
+// 			free_commands(cmd);
+// 			exit(EXIT_FAILURE);
+// 		}
+// 		execute(cmd);
+// 	}
+// 	else
+// 	{
+// 		ignore_signals();
+// 		if (!cmd->io->use_pipe[WRITE])
+// 			get()->final_pid = pid;
+// 	}
+// 	return (1);
+// }

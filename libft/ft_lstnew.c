@@ -21,6 +21,7 @@ t_list	*ft_lstnew(char *content, int type)
 		return (NULL);
 	new->content = content;
 	new->type = type;
+	new->quote_exc = 0;
 	new->next = NULL;
 	return (new);
 }

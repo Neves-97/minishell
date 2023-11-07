@@ -33,25 +33,26 @@ char	**get_argv_env(void)
 	int		size;
 	int		i;
 	char	**env_copy;
-	char	**env; // Assuming get()->env is a char**
+	char	**env;
+
 	i = 0;
 	size = 0;
 	env = get()->env;
-	while (env[size] != NULL) // Calculate the size of the char** array using a while loop
+	while (env[size] != NULL)
 		size++;
 	env_copy = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!env_copy)
-		return (NULL); // Handle allocation error
-	while (env[i] != NULL) // Copy the char** data into the new array using a while loop
+		return (NULL);
+	while (env[i] != NULL)
 	{
 		env_copy[i] = strdup(env[i]);
 		if (!env_copy[i])
 		{
 			free(env_copy);
-			return (NULL); // Handle allocation error
+			return (NULL);
 		}
 		i++;
 	}
-	env_copy[size] = NULL; // Null-terminate the new char** array
+	env_copy[size] = NULL;
 	return (env_copy);
 }

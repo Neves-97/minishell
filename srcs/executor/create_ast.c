@@ -40,6 +40,7 @@ void	add_builtin(t_built **list, char *cmd, int (*f)(char **))
 		// free_tokens_ast();
 		// free_ptp(get()->env);
 		// free(new);
+		free_them_all();
 		exit(EXIT_FAILURE);
 	}
 	new->cmd = cmd;

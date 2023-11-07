@@ -32,6 +32,13 @@ void	here_run(char *eof, int fd)
 // free_tokens_ast();
 // free_ptp(get()->env) on line 40;
 
+void	child_here(char *eof, int fd)
+{
+	heredoc_signals();
+	here_run(eof, fd);
+	exit(0);
+}
+
 int	hd_input(char *eof, int fd)
 {
 	pid_t	pid;
@@ -44,10 +51,7 @@ int	hd_input(char *eof, int fd)
 		exit(EXIT_FAILURE);
 	}
 	if (pid == 0)
-	{
-		heredoc_signals();
-		here_run(eof, fd);
-	}
+		child_here(eof, fd);
 	else
 	{
 		ignore_signals();
@@ -96,24 +100,5 @@ int	hd_command(t_ast *root)
 		}
 		redirection = redirection->left;
 	}
-	return (1);
-}
-
-/* Execute the <pipe> syntax block */
-int	hd_pipe(t_ast *root)
-{
-	t_ast	*job;
-
-	if (!hd_command(root->left))
-		return (0);
-	job = root->right;
-	while (job && job->type == AST_PIPE)
-	{
-		if (!hd_command(job->left))
-			return (0);
-		job = job->right;
-	}
-	if (!hd_command(job))
-		return (0);
 	return (1);
 }

@@ -70,8 +70,7 @@ void	delete_empty_tokens(t_list **head)
 	}
 	while ((*head))
 	{
-		if (is_any_quote((*head)->content[0]) &&
-		is_any_quote((*head)->content[1]) && !((*head)->content[2]))
+		if ((*head)->quote_exc == 1)
 			return (quotes_exception(head, &tmp));
 		while ((*head)->next && !(*head)->next->content[0])
 		{

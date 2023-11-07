@@ -205,10 +205,9 @@ char	*ft_strndup(const char *s, int n);
 
 // quote_and_expand.c
 void	quote_and_expand(t_list *tokens);
-int		is_any_quote(char c);
 
 // quote_and_expand_utils.c
-int		is_any_quote(char c);
+int		is_qt(char c);
 
 // parser.c
 void	parser(void);
@@ -273,7 +272,8 @@ char	*sub_tild_dir(char *relative);
 char	*search_path(char *cmd, char *env_path);
 int		is_directory(char *cmd);
 int		is_directory2(char *cmd, t_cmd *cmds);
-int		execute(t_cmd *cmd);
+// int		execute(t_cmd *cmd);
+void		execute(t_cmd *cmd);
 
 
 
@@ -345,12 +345,12 @@ void	execute_pipe(t_ast *root);
 
 int		out_tr_redir(t_ast *node, int *out_fd);
 int		out_ap_redir(t_ast *node, int *out_fd);
-int		in_redir(t_ast *node, int *in_fd);
-int		heredoc_redir(t_ast *node, int *fd);
+int		in_redir(t_ast *node, int *in_fd, t_cmd *cmd);
+int		heredoc_redir(t_ast *node, int *fd, t_cmd *cmd);
 
 // redirs_setup.c
 
-int		setup_redir_cases(t_ast *node, int *in_fd, int *out_fd);
+int		setup_redir_cases(t_ast *node, int *in_fd, int *out_fd, t_cmd *cmd);
 int		setup_file_redir(t_cmd *cmd, t_bool is_parent);
 
 // set_up.c
@@ -385,10 +385,19 @@ void	ft_lstdelone1(t_list *lst, void (*del)(void *));
 char	*sub_tild_dir(char *relative);
 char	*search_path(char *cmd, char *env_path);
 int		is_directory(char *cmd);
+int		is_directory2(char *cmd, t_cmd *cmds);
 int		check_error(char *path, t_cmd *cmd);
 char	*get_env_value(char *value);
 char	**get_argv_env(void);
 void	free_split(char **split);
 void	print_env(char **env);
+
+void	child_here(char *eof, int fd);
+
+
+char	*valid_path(t_cmd *cmd);
+void	exec_error(t_cmd *cmd, char *full_path);
+void	execv_cmd(char *full_path, t_cmd *cmd);
+void	execute(t_cmd *cmd);
 
 #endif

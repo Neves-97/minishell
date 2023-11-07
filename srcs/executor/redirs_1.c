@@ -8,7 +8,7 @@ int	out_tr_redir(t_ast *node, int *out_fd)
 	if (*out_fd == -1)
 	{
 		free_them_all();
-		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+		exit(EXIT_FAILURE);
 	}
 	return (0);
 }
@@ -21,27 +21,28 @@ int	out_ap_redir(t_ast *node, int *out_fd)
 	if (*out_fd == -1)
 	{
 		free_them_all();
-		exit(EXIT_FAILURE);		// exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+		exit(EXIT_FAILURE);
 	}
 	return (0);
 }
 
-int	in_redir(t_ast *node, int *in_fd)
+int	in_redir(t_ast *node, int *in_fd, t_cmd *cmd)
 {
 	if (*in_fd != -1)
 		close(*in_fd);
 	*in_fd = open(node->content, O_RDONLY, 0664);
 	if (*in_fd == -1)
 	{
-		// free_tokens_ast();
-		// free_nodes();
+		ft_putstr_fd(node->content, 2);
+		ft_putendl_fd(": No such file or directory", 2);
 		free_them_all();
-		exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+		free_commands(cmd);
+		exit(EXIT_FAILURE);
 	}
 	return (0);
 }
 
-int	heredoc_redir(t_ast *node, int *fd)
+int	heredoc_redir(t_ast *node, int *fd, t_cmd *cmd)
 {
 	(void) node;
 	if (*fd != -1)
@@ -49,17 +50,15 @@ int	heredoc_redir(t_ast *node, int *fd)
 	*fd = open(node->content, O_RDONLY);
 	if (*fd == -1)
 	{
-		// TODO: // handle error
-		free_tokens_ast();
-		free_ptp(get()->env);
+		free_them_all();
+		free_commands(cmd);
 		perror("Error opening file");
 		exit(EXIT_FAILURE);
 	}
 	if (unlink(node->content) == -1)
 	{
-		// TODO: // handle error
-		free_tokens_ast();
-		free_ptp(get()->env);
+		free_them_all();
+		free_commands(cmd);
 		perror("Error unlink");
 		exit(EXIT_FAILURE);
 	}

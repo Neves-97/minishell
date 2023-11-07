@@ -57,7 +57,6 @@ void	setup_cmd(t_ast *root, t_io *io, t_cmd *cmd)
 		return ;
 	}
 	cmd->cmds = create_args(root, cmd);
-	// free(cmd->cmds);
 }
 
 void	setup_pipe_redir(t_cmd *cmd, t_bool is_parent)
