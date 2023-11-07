@@ -8,7 +8,7 @@ void	wait_exec(void)
 	while (1)
 	{
 		pid = waitpid(-1, &wstatus, 0);
-		signal(2, sig_handler);
+		// signal(2, sig_handler);
 		if (pid <= 0)
 			return ;
 		if (pid == get()->final_pid)
@@ -21,8 +21,9 @@ void	wait_exec(void)
 				//TODO: FIX ERROR MSG.
 				// free_tokens_ast();
 				// free_ptp(get()->env);
-				free_them_all();
-				exit(EXIT_FAILURE);
+				// free_them_all();
+				display_err_msg(wstatus);
+				// exit(EXIT_FAILURE);
 			}
 		}
 	}

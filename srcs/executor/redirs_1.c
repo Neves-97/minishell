@@ -33,9 +33,10 @@ int	in_redir(t_ast *node, int *in_fd)
 	*in_fd = open(node->content, O_RDONLY, 0664);
 	if (*in_fd == -1)
 	{
-		free_tokens_ast();
-		free_nodes();
-		exit(EXIT_FAILURE); // exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
+		// free_tokens_ast();
+		// free_nodes();
+		free_them_all();
+		exit(EXIT_FAILURE); // TODO: Handle because there was an error, and exit
 	}
 	return (0);
 }

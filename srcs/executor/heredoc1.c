@@ -42,6 +42,7 @@ int	hd_input(char *eof, int fd)
 	{
 		free_them_all();
 		exit(EXIT_FAILURE);
+	}
 	if (pid == 0)
 	{
 		heredoc_signals();

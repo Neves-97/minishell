@@ -272,13 +272,16 @@ int		search_env(char *var);
 char	*sub_tild_dir(char *relative);
 char	*search_path(char *cmd, char *env_path);
 int		is_directory(char *cmd);
-int		check_error(char *path);
+int		is_directory2(char *cmd, t_cmd *cmds);
+int		execute(t_cmd *cmd);
+
+
 
 // and_or 
 
 void	exec_and_or(t_ast *root);
 void	execute_helper(char *full_path, t_cmd *cmd);
-void	execute(t_cmd *cmd);
+
 
 // create_ast
 
@@ -383,7 +386,6 @@ char	*sub_tild_dir(char *relative);
 char	*search_path(char *cmd, char *env_path);
 int		is_directory(char *cmd);
 int		check_error(char *path, t_cmd *cmd);
-int		execute(t_cmd *cmd);
 char	*get_env_value(char *value);
 char	**get_argv_env(void);
 void	free_split(char **split);
