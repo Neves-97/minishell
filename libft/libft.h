@@ -21,6 +21,7 @@ typedef struct s_list
 {
 	char			*content;
 	int				type;
+	int				quote_exc;
 	struct s_list	*next;
 }	t_list;
 

@@ -205,10 +205,9 @@ char	*ft_strndup(const char *s, int n);
 
 // quote_and_expand.c
 void	quote_and_expand(t_list *tokens);
-int		is_any_quote(char c);
 
 // quote_and_expand_utils.c
-int		is_any_quote(char c);
+int		is_qt(char c);
 
 // parser.c
 void	parser(void);
@@ -286,12 +285,12 @@ void	handle_command(t_ast *root, t_io *io);
 
 int		out_tr_redir(t_ast *node, int *out_fd);
 int		out_ap_redir(t_ast *node, int *out_fd);
-int		in_redir(t_ast *node, int *in_fd);
-int		heredoc_redir(t_ast *node, int *fd);
+int		in_redir(t_ast *node, int *in_fd, t_cmd *cmd);
+int		heredoc_redir(t_ast *node, int *fd, t_cmd *cmd);
 
 // BUILTINS/redirs_setup.c
 
-int		setup_redir_cases(t_ast *node, int *in_fd, int *out_fd);
+int		setup_redir_cases(t_ast *node, int *in_fd, int *out_fd, t_cmd *cmd);
 int		setup_file_redir(t_cmd *cmd, t_bool is_parent);
 
 // BUILTINS/set_up.c

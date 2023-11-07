@@ -1,15 +1,15 @@
 #include "../../includes/minishell.h"
 
-int	setup_redir_cases(t_ast *node, int *in_fd, int *out_fd)
+int	setup_redir_cases(t_ast *node, int *in_fd, int *out_fd, t_cmd *cmd)
 {
 	if (node->type == AST_RDO_TR)
 		return (out_tr_redir(node, out_fd));
 	else if (node->type == AST_RDO_AP)
 		return (out_ap_redir(node, out_fd));
 	else if (node->type == AST_RDI)
-		return (in_redir(node, in_fd));
+		return (in_redir(node, in_fd, cmd));
 	else if (node->type == AST_RDI_HD)
-		return (heredoc_redir(node, in_fd));
+		return (heredoc_redir(node, in_fd, cmd));
 	return (1);
 }
 
@@ -24,7 +24,7 @@ int	setup_file_redir(t_cmd *cmd, t_bool is_parent)
 	out_fd = -1;
 	while (tmp)
 	{
-		if (setup_redir_cases(tmp, &in_fd, &out_fd))
+		if (setup_redir_cases(tmp, &in_fd, &out_fd, cmd))
 			return (1);
 		tmp = tmp->left;
 	}
