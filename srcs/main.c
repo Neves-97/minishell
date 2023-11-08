@@ -4,7 +4,7 @@ void	minishell(t_msh *data)
 {
 	lexer(data);
 	// printf("AFTER LEXER\n\n");
-	// print_list(data->tokens);
+	print_list(data->tokens);
 	parser();
 	// print_ast(get()->ast_tmp, 0);
 	executor();
