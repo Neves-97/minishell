@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:13:04 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:13:05 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	validate_code(char **cmds, int i)
@@ -21,6 +33,7 @@ int	validate_code(char **cmds, int i)
 			free_ptp(get()->env);
 			free_builtins();
 			free_tokens_ast();
+			free(cmds);
 			get()->exit_status = 2;
 			exit(get()->exit_status);
 		}

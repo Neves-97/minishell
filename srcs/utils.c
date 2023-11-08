@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:17:04 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:17:05 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	is_whtspc(char *str)
@@ -65,13 +77,4 @@ t_msh	*get(void)
 	static t_msh	data;
 
 	return (&data);
-}
-
-void print_env(char **env) {
-	if (!env) {
-		printf("Foda-se\n");
-		return ;
-	}
-	for (int i = 0; env[i]; i++)
-		printf("%s\n", env[i]);
 }

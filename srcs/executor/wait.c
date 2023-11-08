@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wait.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:14:58 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:14:59 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 void	wait_exec(void)
@@ -8,7 +20,6 @@ void	wait_exec(void)
 	while (1)
 	{
 		pid = waitpid(-1, &wstatus, 0);
-		// signal(2, sig_handler);
 		if (pid <= 0)
 			return ;
 		if (pid == get()->final_pid)
@@ -18,12 +29,7 @@ void	wait_exec(void)
 			else if (WIFSIGNALED(wstatus))
 			{
 				get()->exit_status = WTERMSIG(wstatus) + 128;
-				//TODO: FIX ERROR MSG.
-				// free_tokens_ast();
-				// free_ptp(get()->env);
-				// free_them_all();
 				display_err_msg(wstatus);
-				// exit(EXIT_FAILURE);
 			}
 		}
 	}

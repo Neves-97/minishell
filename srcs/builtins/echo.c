@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:12:59 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:12:59 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	check_n(char *arg)
@@ -33,7 +45,7 @@ int	ft_echo(char **args)
 		has_flag = 0;
 	i = 1;
 	if (!args || !args[0])
-		return (1); // TODO: Update status code **arg
+		return (1);
 	i = 1 + has_flag;
 	while (args[i]) 
 	{

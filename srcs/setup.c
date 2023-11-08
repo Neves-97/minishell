@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setup.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:49:38 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:49:39 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	setup(t_msh *data, char **envp)
@@ -5,7 +17,7 @@ void	setup(t_msh *data, char **envp)
 	data->env = dup_ptp(envp);
 	inc_shlvl(data->env);
 	data->builtins = init_builtins();
-	// free_ptp(data->env);
+	pqp()[0] = 0;
 }
 
 void	inc_shlvl(char **env)

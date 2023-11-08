@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:11:53 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:11:54 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -26,6 +38,7 @@
 # include "../libft/get_next_line/get_next_line.h"
 # include "ft_bool.h"
 
+int		*pqp(void);
 typedef struct s_ast	t_ast;
 
 # define AST_CMD	0 
@@ -205,9 +218,11 @@ char	*ft_strndup(const char *s, int n);
 
 // quote_and_expand.c
 void	quote_and_expand(t_list *tokens);
+char	*handle_quotes(char *cont);
 
 // quote_and_expand_utils.c
 int		is_qt(char c);
+int		check_hd(t_list *tokens, t_list *head);
 
 // parser.c
 void	parser(void);
@@ -272,16 +287,13 @@ char	*sub_tild_dir(char *relative);
 char	*search_path(char *cmd, char *env_path);
 int		is_directory(char *cmd);
 int		is_directory2(char *cmd, t_cmd *cmds);
-// int		execute(t_cmd *cmd);
-void		execute(t_cmd *cmd);
 
-
+void	execute(t_cmd *cmd);
 
 // and_or 
 
 void	exec_and_or(t_ast *root);
 void	execute_helper(char *full_path, t_cmd *cmd);
-
 
 // create_ast
 
@@ -306,6 +318,7 @@ void	exec_cmd(t_cmd *cmd);
 
 void	free_tokens_ast(void);
 void	free_them_all(void);
+void	hd_free(int *fd, char *input);
 
 // get_args
 
@@ -380,8 +393,6 @@ int		validate_code(char **cmds, int i);
 void	ft_lstclear1(t_list **lst, void (*del)(void *));
 void	ft_lstdelone1(t_list *lst, void (*del)(void *));
 
-
-
 char	*sub_tild_dir(char *relative);
 char	*search_path(char *cmd, char *env_path);
 int		is_directory(char *cmd);
@@ -393,7 +404,6 @@ void	free_split(char **split);
 void	print_env(char **env);
 
 void	child_here(char *eof, int fd);
-
 
 char	*valid_path(t_cmd *cmd);
 void	exec_error(t_cmd *cmd, char *full_path);

@@ -1,4 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_up.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:14:53 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:14:53 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
+
+// Setting up use_pipe[2]
 
 t_io	*setup_io(int io_type, int pipe_fd[2], int read_fd)
 {
@@ -8,7 +22,6 @@ t_io	*setup_io(int io_type, int pipe_fd[2], int read_fd)
 	if (!io)
 		return (NULL);
 	io->cmd_type = io_type;
-	// Setting up use_pipe[2]
 	setup_pipe_bools(io);
 	if (io_type != SINGLE_CMD)
 	{
@@ -29,9 +42,6 @@ char	**create_args(t_ast *root, t_cmd *cmd)
 	arr = ft_calloc(cmd->num_cmds + 1, sizeof(char *));
 	if (!arr)
 	{
-		// free_tokens_ast();
-		// free_nodes();
-		// free_builtins();
 		return (NULL);
 	}
 	tmp = root;
@@ -61,7 +71,6 @@ void	setup_cmd(t_ast *root, t_io *io, t_cmd *cmd)
 
 void	setup_pipe_redir(t_cmd *cmd, t_bool is_parent)
 {
-	// TODO: IF SOMETHING IS NTO WORKING WITH BUILTINS, CHECK IS PARENT
 	if (!cmd->io->use_pipe[READ] && !cmd->io->use_pipe[WRITE])
 		return ;
 	if (cmd->io->use_pipe[READ])

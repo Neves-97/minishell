@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirs_1.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:14:44 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:14:45 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 int	out_tr_redir(t_ast *node, int *out_fd)
@@ -35,9 +47,8 @@ int	in_redir(t_ast *node, int *in_fd, t_cmd *cmd)
 	{
 		ft_putstr_fd(node->content, 2);
 		ft_putendl_fd(": No such file or directory", 2);
-		free_them_all();
-		free_commands(cmd);
-		exit(EXIT_FAILURE);
+		(void)cmd;
+		return (1);
 	}
 	return (0);
 }

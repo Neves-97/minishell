@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:14:34 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:14:35 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 int	hd_pipe(t_ast *root)
@@ -18,7 +30,6 @@ int	hd_pipe(t_ast *root)
 	return (1);
 }
 
-/* Execute the <job> syntax block */
 int	hd_job(t_ast *root)
 {
 	if (!root)
@@ -36,7 +47,6 @@ int	hd_job(t_ast *root)
 	return (1);
 }
 
-// /* Execute the <and or> syntax block */
 int	hd_and_or(t_ast *root)
 {
 	if (!root)

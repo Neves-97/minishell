@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_ast.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:13:40 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:13:41 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 int	count_cmds(t_ast *root)
@@ -26,6 +38,7 @@ int	executor(void)
 	root = get()->ast_tmp;
 	execute_hd(root);
 	exec_and_or(root);
+	unlink(".here");
 	return (0);
 }
 
@@ -37,9 +50,6 @@ void	add_builtin(t_built **list, char *cmd, int (*f)(char **))
 	new = (t_built *)malloc(sizeof(t_built));
 	if (!new)
 	{
-		// free_tokens_ast();
-		// free_ptp(get()->env);
-		// free(new);
 		free_them_all();
 		exit(EXIT_FAILURE);
 	}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_codes.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:13:44 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:13:44 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 char	*get_err_msg3(int err_code)
@@ -40,7 +52,6 @@ char	*get_err_msg2(int err_code)
 		return (get_err_msg3(err_code));
 }
 
-/* Returns the corresponding error message using ft_strdup */
 char	*get_err_msg(int err_code)
 {
 	if (err_code == 1)

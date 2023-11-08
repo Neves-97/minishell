@@ -1,41 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc1.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:14:31 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:14:32 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 void	here_run(char *eof, int fd)
 {
 	char	*input;
+	char	*tmp;
 
+	pqp()[0] = 1;
 	while (1)
 	{
 		input = readline("> ");
+		if (!input)
+			break ;
 		if (ft_strlen(input) == ft_strlen(eof))
 		{
 			if (!ft_strncmp(eof, input, ft_strlen(eof)))
 			{
-				close(fd);
-				free(input);
-				free_them_all();
+				hd_free(&fd, input);
 				exit(EXIT_SUCCESS);
 			}
 		}
+		tmp = input;
+		input = handle_quotes(tmp);
+		free (tmp);
 		ft_putendl_fd(input, fd);
 		free(input);
 	}
-	ft_putstr_fd("minishell: warning: here-document \
-		delimited by end-of-file (wanted `", STDERR_FILENO);
-	ft_putstr_fd(eof, STDERR_FILENO);
-	ft_putstr_fd("')\n", STDERR_FILENO);
-	close(fd);
-	free(input);
+	hd_free(&fd, input);
 	exit(EXIT_SUCCESS);
 }
 
-// free_tokens_ast();
-// free_ptp(get()->env) on line 40;
-
 void	child_here(char *eof, int fd)
 {
-	heredoc_signals();
 	here_run(eof, fd);
+	pqp()[0] = 0;
 	exit(0);
 }
 
@@ -80,8 +89,6 @@ int	handle_hd(t_ast *redir)
 	}
 	free(redir->content);
 	redir->content = ft_strdup(".here");
-	// free_tokens_ast();
-	// free_ptp(get()->env);
 	close(fd);
 	return (1);
 }
@@ -90,13 +97,18 @@ int	hd_command(t_ast *root)
 {
 	t_ast	*redirection;
 
-	redirection = root->left;
+	if (root->left)
+		redirection = root->left;
+	else
+		redirection = root;
 	while (redirection)
 	{
 		if (redirection->type == AST_RDI_HD)
 		{
 			if (!handle_hd(redirection))
+			{
 				return (0);
+			}
 		}
 		redirection = redirection->left;
 	}

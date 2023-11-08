@@ -1,14 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:14:55 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:14:56 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	sig_handler(int signum)
 {
-	if (signum == SIGINT)
+	if (signum == SIGINT && pqp()[0] == 0)
 	{
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 		get()->exit_status = 130;
+	}
+	else if (signum == SIGINT && pqp()[0] == 1)
+	{
+		free_them_all();
+		get()->exit_status = 130;
+		exit(130);
 	}
 }
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token_list.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:16:44 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:30:24 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_ast	*token_list(void)
@@ -34,10 +46,15 @@ t_ast	*tl_case1(void)
 	{
 		if (get()->tokens_tmp->type == 0)
 		{
-			cmd = ft_strdup(get()->tokens_tmp->content);
-			get()->tokens_tmp = get()->tokens_tmp->next;
-			get()->ast_tmp->content = cmd;
-			token_list();
+			if (get()->tokens_tmp->content[0] == '\0')
+				cmd = ft_strdup("\0");
+			else
+			{
+				cmd = ft_strdup(get()->tokens_tmp->content);
+				get()->tokens_tmp = get()->tokens_tmp->next;
+				get()->ast_tmp->content = cmd;
+				token_list();
+			}
 			return (get()->ast_tmp);
 		}
 	}
@@ -76,6 +93,7 @@ t_ast	*tl_case3(void)
 	if (!get()->ast_tmp->content)
 	{
 		get()->ast_tmp->content = new_node->content;
+		get()->ast_tmp->type = new_node->type;
 		free (new_node);
 		token_list();
 		return (get()->ast_tmp);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quote_and_expand.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 15:16:17 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 15:16:17 by ratavare         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 char	*replace_env_var(char *var)
@@ -23,7 +35,7 @@ char	*replace_env_var(char *var)
 	return (NULL);
 }
 
-char	*expand(char *cont, char *ns, int *i, int *j)
+char	*expand(char *c, char *ns, int *i, int *j)
 {
 	char	*n2;
 	char	*exp;
@@ -32,19 +44,19 @@ char	*expand(char *cont, char *ns, int *i, int *j)
 
 	start = i[0] + 1;
 	var_len = 0;
-	while (cont[i[0]++] && (ft_isalnum(cont[i[0]]) || cont[i[0]] == '?'))
+	while (c[i[0]++] && (ft_isalnum(c[i[0]]) || c[i[0]] == '?'))
 	{
 		var_len++;
-		if (cont[i[0] + 1] == '?')
+		if (c[i[0] + 1] == '?')
 			break ;
 	}
-	exp = replace_env_var(ft_strndup(cont + start, var_len));
+	exp = replace_env_var(ft_strndup(c + start, var_len));
 	n2 = ft_strjoin(ns, exp);
 	if (n2)
 	{
 		free (ns);
 		free (exp);
-		ns = ft_calloc(ft_strlen(n2) + ft_strlen(cont + i[0]) + 1, sizeof(char));
+		ns = ft_calloc(ft_strlen(n2) + ft_strlen(c + i[0]) + 1, sizeof(char));
 		ft_memcpy(ns, n2, ft_strlen(n2));
 		free (n2);
 		j[0] = ft_strlen(ns);
@@ -112,6 +124,8 @@ void	quote_and_expand(t_list *tokens)
 		if ((is_qt(tokens->content[0]) && \
 		is_qt(tokens->content[1])) && !tokens->content[2])
 			tokens->quote_exc = 1;
+		else if (check_hd(tokens, tmp))
+			;
 		else
 		{
 			old_str = tokens->content;
