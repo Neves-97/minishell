@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:16:44 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/08 15:30:24 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:15:02 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,14 @@ t_ast	*tl_case3(void)
 	new_node = redir();
 	if (!new_node)
 		return (NULL);
-	if (!get()->ast_tmp->content)
-	{
-		get()->ast_tmp->content = new_node->content;
-		get()->ast_tmp->type = new_node->type;
-		free (new_node);
-		token_list();
-		return (get()->ast_tmp);
-	}
+	// if (!get()->ast_tmp->content)
+	// {
+	// 	get()->ast_tmp->content = new_node->content;
+	// 	get()->ast_tmp->type = new_node->type;
+	// 	free (new_node);
+	// 	token_list();
+	// 	return (get()->ast_tmp);
+	// }
 	token_list();
 	ast_add_node(get()->ast_tmp, new_node, 0);
 	return (new_node);

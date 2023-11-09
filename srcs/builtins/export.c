@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:13:09 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/08 15:13:10 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/08 22:17:35 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	ft_export_arg(char *arg)
 
 	if (!export_check(arg))
 		return (1);
+	i = ft_strlen(arg);
+	is_set(arg);
 	i = 0;
 	while (get()->env[i])
 		i++;

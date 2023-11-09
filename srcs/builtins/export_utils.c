@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   and_or.c                                           :+:      :+:    :+:   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 15:13:35 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/09 12:21:08 by ratavare         ###   ########.fr       */
+/*   Created: 2023/11/08 21:57:09 by ratavare          #+#    #+#             */
+/*   Updated: 2023/11/08 22:16:55 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
-void	exec_and_or(t_ast *root)
+int	is_set(char *arg)
 {
-	if (!root || !root->content) // changed second condition
-		return ;
-	if (root->type == AST_AND)
+	int		max;
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	j = ft_strlen(arg);
+	while (arg[j] != '=')
+		j--;
+	tmp = ft_substr(arg, 0, j);
+	while (get()->env[i])
+		i++;
+	max = i;
+	i = search_env(tmp);
+	if (i < max)
 	{
-		exec_and_or(root->left);
-		if (get()->exit_status == 0)
-			exec_and_or(root->right);
+		ft_unset_arg(tmp);
+		free(tmp);
+		return (1);
 	}
-	else if (root->type == AST_OR)
-	{
-		exec_and_or(root->left);
-		if (get()->exit_status != 0)
-			exec_and_or(root->right);
-	}
-	else
-		execute_job(root);
+	free (tmp);
+	return (0);
 }

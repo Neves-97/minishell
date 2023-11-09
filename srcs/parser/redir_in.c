@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:16:36 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/08 15:16:37 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:13:21 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_ast	*redir_in_case2(void)
 	if (!get()->tokens_tmp)
 		return (NULL);
 	if (get()->tokens_tmp->type != AST_IN)
+		return (NULL);
+	if (get()->tokens_tmp->next->type != AST_CMD)
 		return (NULL);
 	get()->tokens_tmp = get()->tokens_tmp->next;
 	if (!get()->tokens_tmp || (!get()->tokens_tmp->type) == 0)

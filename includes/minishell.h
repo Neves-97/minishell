@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:11:53 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/08 15:11:54 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/08 22:04:26 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,8 +278,8 @@ void	printf_and_free(char *str);
 int		ft_pwd(char **arg);
 int		ft_unset(char **arg);
 void	ft_unset_arg(char *arg);
-// int		ft_exit(void);
 int		search_env(char *var);
+int		is_set(char *arg);
 
 // access
 

@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:14:31 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/08 15:14:32 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:37:12 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,9 @@ int	handle_hd(t_ast *redir)
 
 	fd = open(".here", O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (fd == -1)
+	{
 		exit(EXIT_FAILURE);
+	}
 	if (!hd_input(redir->content, fd))
 	{
 		close(fd);
@@ -97,7 +99,7 @@ int	hd_command(t_ast *root)
 {
 	t_ast	*redirection;
 
-	if (root->left)
+	if (root->left && root->type == 0) // second condition might be useless or wrong
 		redirection = root->left;
 	else
 		redirection = root;

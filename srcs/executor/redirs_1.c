@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:14:44 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/08 15:14:45 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:42:14 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ int	heredoc_redir(t_ast *node, int *fd, t_cmd *cmd)
 		perror("Error opening file");
 		exit(EXIT_FAILURE);
 	}
-	if (unlink(node->content) == -1)
-	{
-		free_them_all();
-		free_commands(cmd);
-		perror("Error unlink");
-		exit(EXIT_FAILURE);
-	}
+	// if (unlink(node->content) == -1)  pode tar a dar merda
+	// {
+	// 	free_them_all();
+	// 	free_commands(cmd);
+	// 	perror("Error unlink");
+	// 	exit(EXIT_FAILURE);
+	// }
 	return (0);
 }
