@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:13:26 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/08 15:13:26 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:20:21 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	check_error(char *path, t_cmd *cmd)
 		free_them_all();
 		free (path);
 		free_commands(cmd);
-		return (126);
+		return (127);
 	}
 	return (EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:12:52 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/08 21:52:09 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:05:22 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	cd_err(char *dir)
 	return (1);
 }
 
-char	*get_home(void)
+int	get_home(char **dir)
 {
 	int	i;
 
@@ -58,21 +58,27 @@ char	*get_home(void)
 	if (!get()->env[i])
 	{
 		ft_putendl_fd("cd: HOME not set", 2);
-		return (NULL);
+		return (0);
 	}
-	return (ft_strdup(get()->env[i] + 5));
+	dir[0] = ft_strdup(get()->env[i] + 5);
+	if (!dir[0])
+	{
+		free (dir[0]);
+		return (0);
+	}
+	return (1);
 }
 
 int	ft_cd(char	**arg)
 {
-	char	*dir;
-	char	*dir_tmp;
+	static char		*dir;
+	static char		*dir_tmp;
 
-	dir_tmp = NULL;
+	if (arg[1] && arg[2])
+		return (1);
 	if (!arg[1])
 	{
-		dir = get_home();
-		if (!dir)
+		if (!get_home(&dir))
 			return (1);
 	}
 	else if (arg[1][0] == '/')

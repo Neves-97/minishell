@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:14:11 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/08 15:14:11 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:31:12 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static int	exec_builtin(t_cmd *cmd, t_built *builtin)
 	dup2(get()->fd[WRITE], STDOUT_FILENO);
 	return (1);
 }
+
+// exit(get()->exit_status);
 
 static int	exec_pipe_builtin(t_cmd *cmd, t_built *builtin)
 {

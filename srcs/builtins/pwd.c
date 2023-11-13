@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:13:13 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/08 15:13:14 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/09 15:41:55 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_pwd(char **arg)
 	{
 		write(1, cwd, ft_strlen(cwd));
 		write(1, "\n", 1);
-		return (1);
+		return (0);
 	}
 	return (0);
 }

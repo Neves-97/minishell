@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:13:09 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/08 22:17:35 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:05:01 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	export_check(char *arg)
 	{
 		if (arg[i] == '=')
 			return (1);
+		if (!(ft_isalnum(arg[i])))
+			return (0);
 		i++;
 	}
 	return (0);
@@ -103,11 +105,22 @@ int	ft_export_arg(char *arg)
 int	ft_export(char **arg)
 {
 	int	i;
+	int	num;
 
 	i = 1;
+	num = 0;
 	if (!arg[i])
 		return (export_no_args());
 	while (arg[i])
-		ft_export_arg(arg[i++]);
+	{
+		if (ft_export_arg(arg[i++]))
+		{
+			if (num == 0 && !arg[2])
+				return (1);
+			else
+				return (0);
+		}
+		num++;
+	}
 	return (0);
 }

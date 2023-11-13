@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:16:44 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/09 12:15:02 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:26:08 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_ast	*tl_case1(void)
 		if (get()->tokens_tmp->type == 0)
 		{
 			if (get()->tokens_tmp->content[0] == '\0')
-				cmd = ft_strdup("\0");
+				cmd = NULL;
 			else
 			{
 				cmd = ft_strdup(get()->tokens_tmp->content);

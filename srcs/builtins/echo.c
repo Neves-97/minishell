@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:12:59 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/08 15:12:59 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:21:30 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,13 @@ int	ft_echo(char **args)
 	i = 1 + has_flag;
 	while (args[i]) 
 	{
-		ft_printf("%s", args[i]);
+		ft_putstr_fd(args[i], 1);
 		if (args[i + 1])
-			ft_printf(" ");
+			ft_putstr_fd(" ", 1);
 		i++;
 	}
 	if (!has_flag)
-		ft_printf("\n");
-	return (0);
+		ft_putstr_fd("\n", 1);
+	get()->exit_status = 0;
+	return (get()->exit_status);
 }

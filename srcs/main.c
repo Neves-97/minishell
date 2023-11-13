@@ -6,7 +6,7 @@
 /*   By: ratavare <ratavare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:16:50 by ratavare          #+#    #+#             */
-/*   Updated: 2023/11/09 12:03:52 by ratavare         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:27:23 by ratavare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int	main(int ac, char **av, char **envp)
 	}
 	free_ptp(get()->env);
 	free_builtins();
+	// exit(get()->exit_status);
 	return (get()->exit_status);
 }
